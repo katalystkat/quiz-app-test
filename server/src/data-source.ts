@@ -2,7 +2,7 @@ import { DataSource } from 'typeorm';
 import dotenv from 'dotenv';
 import { join } from "path";
 
-export const appDataSource = new DataSource({
+export const AppDataSource = new DataSource({
     type: "postgres",
     host: "localhost",
     port: 5432,
@@ -15,7 +15,7 @@ export const appDataSource = new DataSource({
 })
 
 try {
-    await appDataSource.initialize();
+    await AppDataSource.initialize();
     console.log('AppDataSource connection established successfully');
 } catch (error){
     console.log('Error connecting to AppDataSource', error);
