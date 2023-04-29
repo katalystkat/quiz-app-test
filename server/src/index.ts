@@ -1,22 +1,19 @@
-import express from 'express';
-import cors from 'cors';
-import morgan from 'morgan'
-const app = express();
+import * as dotenv from 'dotenv';
+import 'reflect-metadata';
+dotenv.config();
 
-app.use(express.json());
-app.use(cors());
-app.use(morgan('tiny'));
-app.disable('x-powered-by');
+import createServer from './config/server';
+import { AppDataSource } from './data-source';
 
-const port = 8080;
+const host = process.env.HOST || '0.0.0.0';
+const port = process.env.PORT || '8080';
 
-// HTTP GET Request
-app.get('/', (req, res) => {
-    res.status(201).json("Home GET Request");
-});
+const app = createServer();
 
-
-// start server
-app.listen(port, ()=> {
-    console.log(`Server listening at port ${port}`)
-});
+AppDataSource.initialize()
+    .then(() => {
+        app.listen({ host, port }, () => {
+            console.info(`⚡️ Server is running at http://${host}:${port}`);
+        });
+    })
+    .catch(console.error);
