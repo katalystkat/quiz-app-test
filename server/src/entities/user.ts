@@ -18,6 +18,9 @@ export class User {
     @Column({ nullable: false, unique: true, length: 20 })
     username!: string;
 
+    @Column({ nullable: false})
+    email!: string;
+
     @Column({ nullable: false })
     hashPassword!: string;
 

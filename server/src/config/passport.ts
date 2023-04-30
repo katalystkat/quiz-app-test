@@ -19,7 +19,7 @@ passport.use(
                 
                 // Search a user whose username is the login parameter
                 const user = await userRepo.findOne({
-                    where: [{ username: login }],
+                    where: [{ username: login }, { email: login}],
                 });
 
                 // If the user doesn't exist or the password is wrong, return error as null and user as null
