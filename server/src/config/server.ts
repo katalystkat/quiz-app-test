@@ -2,7 +2,7 @@ import express, { urlencoded, json } from 'express';
 import cors from 'cors';
 import morgan from 'morgan'
 import helmet from 'helmet';
-import crearteHttperror from 'http-errors';
+import createHttperror from 'http-errors';
 
 import session from './session';
 import { errorHandler } from '../middlewares/errorHandler';
@@ -32,7 +32,7 @@ const createServer = () => {
 
     app.use(`/${process.env.API_ROUTES_PREFIX}`, apiRoutes);
     app.get('/*', (req, res) => {
-        throw crearteHttperror(404, 'Page Not Found');
+        throw createHttperror(404, 'Page Not Found');
     });
 
     app.use(errorHandler);
