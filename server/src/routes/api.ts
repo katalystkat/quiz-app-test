@@ -10,3 +10,5 @@ router.use('/auth', authRoutes);
 router.use('/users', usersRoutes);
 
 router.route('/home').get((req, res) => res.send('server routes up!'));
+
+export default router;

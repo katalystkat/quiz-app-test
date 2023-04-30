@@ -6,7 +6,9 @@ import { User } from '../../entities/user';
 import { TypedRequestBody } from '../../types/express/express';
 import { AuthLoginBody, AuthLoginResponse } from '../../types/routes/auth';
 import { validateLoginBody } from './authValidators';
+// TODO: Debug req.session destroy; Can not id session for requests
 
+// Handles user authentication login, logout, authentication
 const login = (
     req: TypedRequestBody<AuthLoginBody>,
     res: Response<AuthLoginResponse>,
@@ -49,9 +51,9 @@ const logout = (
         if (err) { 
             return next(err);
         }
-        req.session.destroy(()=> {
-            return res.send();
-        });
+        // req.session.destroy(()=> {
+        //     return res.send();
+        // });
     });
 };
 

@@ -15,11 +15,11 @@ export class User {
     @CreateDateColumn({ nullable: false })
     createdAt!: Date;
 
-    @Column({ nullable: false, unique: true, length: 20 })
+    @Column({ type: 'varchar', length: 20, unique: true })
     username!: string;
 
     @Column({ nullable: false})
-    email!: string;
+    email!: string; 
 
     @Column({ nullable: false })
     hashPassword!: string;

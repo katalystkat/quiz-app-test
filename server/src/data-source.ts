@@ -1,25 +1,31 @@
 import { DataSource } from 'typeorm';
 import dotenv from 'dotenv';
-import { join } from "path";
+import { Pool } from 'pg';
+// import { join } from "path";
 
 export const AppDataSource = new DataSource({
-    type: "postgres",
-    host: "localhost",
+    type: 'postgres',
+    host: 'localhost',
     port: 5432,
-    username: "postgres",
-    password: "your_postgres_password",
-    database: "quizdb",
-    entities: [
-        // List of entity classes to be used in this connection
-    ],
+    username: 'postgres',
+    password: 'mysecretpassword',
+    database: 'quizdb',
 })
 
-try {
-    await AppDataSource.initialize();
-    console.log('AppDataSource connection established successfully');
-} catch (error){
-    console.log('Error connecting to AppDataSource', error);
-}
+// export const pool = new Pool({
+//     host: "localhost",
+//     port: 5432,
+//     user: "postgres",
+//     password: "mysecretpassword",
+//     database: "quizdb",
+// })
+
+// try {
+//     await AppDataSource.initialize();
+//     console.log('AppDataSource connection established successfully');
+// } catch (error){
+//     console.log('Error connecting to AppDataSource', error);
+// }
 
 // export const AppDataSource = new DataSource({
 //     type: 'postgres',
