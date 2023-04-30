@@ -5,9 +5,9 @@ const sessionStore = process.env.NODE_ENV === 'test' ? undefined : new (pgSessio
     conObject: {
         host: process.env.DB_HOST,
         port: Number(process.env.DB_PORT),
-        user: process.env.DB_USER,
-        password: process.env.DB_PASSWORD,
-        database: process.env.DB_NAME,
+        user: "postgres",
+        password: "mysecretpassword",
+        database: "bakery",
     },
     createTableIfMissing: true,
 });

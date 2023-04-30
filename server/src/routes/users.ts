@@ -5,7 +5,9 @@ import UsersController from '../controllers/users/usersController.js';
 const router = express.Router();
 // should rename this as register route
 // userse controller is registering new users , returns user ID;
-// router.route('/').post(UsersController.create);
+router.route('/').post(UsersController.create);
+// works correctly 
+
 
 // POST Methods
 router.route('/register').post((req, res) => {

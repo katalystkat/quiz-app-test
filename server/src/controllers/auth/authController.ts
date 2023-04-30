@@ -22,14 +22,14 @@ const login = (
             if (err){
                 return next(err);
             }
-            // if (typeof password === 'string' && !((user as Participant).verifyPassword(password))) {
-            //     console.log('in verify')
-            //     return next();
-            // }            if (!user) {
-            //     return next(
-            //         createHttpError(401, 'Incorrect credentials'),
-            //     );
-            // }
+            if (typeof password === 'string' && !((user as Participant).verifyPassword(password))) {
+                console.log('in verify')
+                return next();
+            }            if (!user) {
+                return next(
+                    createHttpError(401, 'Incorrect credentials'),
+                );
+            }
 
             req.logIn(user, (err) => {
                 if (err) {
