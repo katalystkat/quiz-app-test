@@ -1,11 +1,11 @@
 import { Response } from 'express';
 import createHttpError from 'http-errors';
 
-import { AppDataSource } from '../../data-source';
-import { User } from '../../entities/user';
-import { TypedRequestBody } from '../../types/express/express';
-import { UsersCreateBody } from '../../types/routes/users';
-import { validateCreateBody } from './userValidators';
+import { AppDataSource } from '../../data-source.js';
+import { Participant } from '../../entities/user.js';
+import { TypedRequestBody } from '../../types/express/express.js';
+import { UsersCreateBody } from '../../types/routes/users.js';
+import { validateCreateBody } from './userValidators.js';
 
 // Validate, Control, Connect, Start Transaction
 const create = async (req: TypedRequestBody<UsersCreateBody>, res: Response)=> {
@@ -17,7 +17,7 @@ const create = async (req: TypedRequestBody<UsersCreateBody>, res: Response)=> {
     await queryRunner.startTransaction();
 
     try{
-        const userRepo = queryRunner.manager.getRepository(User);
+        const userRepo = queryRunner.manager.getRepository(Participant);
         const usernameExists = await userRepo.exist({
             where : { username }
         });
@@ -30,7 +30,7 @@ const create = async (req: TypedRequestBody<UsersCreateBody>, res: Response)=> {
         if (emailExists) {
             throw createHttpError(409, 'Email already exists');
         }
-        const newUser = new User();
+        const newUser = new Participant();
         newUser.username = username;
         newUser.email = email;
         newUser.setPassword(password);

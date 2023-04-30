@@ -2,8 +2,8 @@ import { Request } from 'express';
 import passport from 'passport';
 import { Strategy as LocalStrategy } from 'passport-local';
 
-import { AppDataSource } from '../data-source';
-import { User } from '../entities/user';
+import { AppDataSource } from '../data-source.js';
+import { Participant } from '../entities/user.js';
 
 // Using Local authentication to check if user exists in db and if password matches user's stored password
 
@@ -15,7 +15,7 @@ passport.use(
         },
         async (login, password, done) => {
             try {
-                const userRepo = AppDataSource.getRepository(User);
+                const userRepo = AppDataSource.getRepository(Participant);
                 
                 // Search a user whose username is the login parameter
                 const user = await userRepo.findOne({
@@ -43,7 +43,7 @@ passport.serializeUser((user: any, done: any) => {
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 passport.deserializeUser(async (req: Request, id: string, done: any) => {
-    const userRepo = AppDataSource.getRepository(User);
+    const userRepo = AppDataSource.getRepository(Participant);
     const user = await userRepo.findOneBy({ id });
 
     if (!user) {

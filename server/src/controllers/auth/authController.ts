@@ -2,10 +2,10 @@ import {NextFunction, Request, Response} from 'express';
 import createHttpError, { HttpError } from 'http-errors';
 import passport from 'passport';
 
-import { User } from '../../entities/user';
-import { TypedRequestBody } from '../../types/express/express';
-import { AuthLoginBody, AuthLoginResponse } from '../../types/routes/auth';
-import { validateLoginBody } from './authValidators';
+import { Participant } from '../../entities/user.js';
+import { TypedRequestBody } from '../../types/express/express.js';
+import { AuthLoginBody, AuthLoginResponse } from '../../types/routes/auth.js';
+import { validateLoginBody } from './authValidators.js';
 // TODO: Debug req.session destroy; Can not id session for requests
 
 // Handles user authentication login, logout, authentication
@@ -17,7 +17,7 @@ const login = (
     validateLoginBody(req.body);
     passport.authenticate(
         'local',
-        (err: HttpError | null, user: User | undefined) => {
+        (err: HttpError | null, user: Participant | undefined) => {
             if (err){
                 return next(err);
             }

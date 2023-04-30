@@ -6,8 +6,8 @@ import {
     ManyToOne,
     PrimaryGeneratedColumn,
   } from 'typeorm';
-  import { Quiz } from './quiz';
-  import { User } from './user';
+  import { Quiz } from './quiz.js';
+  import { Participant } from './user.js';
   
   @Entity()
   export class QuizAttempt {
@@ -17,9 +17,9 @@ import {
     @CreateDateColumn({ nullable: false })
     createdAt!: Date;
   
-    @ManyToOne(() => User)
+    @ManyToOne(() => Participant)
     @JoinColumn()
-    user!: User;
+    user!: Participant;
   
     @ManyToOne(() => Quiz)
     @JoinColumn()

@@ -22,6 +22,7 @@
       "resolveJsonModule": true,
       "isolatedModules": true,
       "noEmit": false,
+      "sourceMap": true,
       "emitDecoratorMetadata": true,
       "jsx": "react-jsx",
     },

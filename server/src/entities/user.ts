@@ -8,7 +8,7 @@ import {
 import bcrypt from 'bcrypt';
 
 @Entity()
-export class User {
+export class Participant {
     @PrimaryGeneratedColumn('uuid')
     id!: string;
 

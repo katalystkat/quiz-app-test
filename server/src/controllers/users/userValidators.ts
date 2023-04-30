@@ -1,5 +1,4 @@
 import createHttpError from 'http-errors';
-import isEmail from 'validator/lib/isEmail';
 
 import { UsersCreateBody } from '../../types/routes/users';
 
@@ -11,9 +10,6 @@ export const validateCreateBody = (body: Partial<UsersCreateBody>) => {
     }
     if (!email){
         throw createHttpError(400, 'Email required');
-    }
-    if (!isEmail(email)){
-        throw createHttpError(400, 'Email is invalid');
     }
     if (!password){
         throw createHttpError(400, 'Password required');

@@ -4,7 +4,7 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { Question } from './question';
+import { Question } from './question.js';
 
 @Entity()
 export class Option {

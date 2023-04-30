@@ -2,8 +2,8 @@ import * as dotenv from 'dotenv';
 import 'reflect-metadata';
 dotenv.config();
 
-import createServer from './config/server';
-import { AppDataSource } from './data-source';
+import createServer from './config/server.js';
+import { AppDataSource } from './data-source.js';
 // import { pool } from './data-source';
 const host = process.env.HOST || '0.0.0.0';
 const port = process.env.PORT || '8080';

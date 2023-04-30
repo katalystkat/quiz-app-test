@@ -4,10 +4,10 @@ import morgan from 'morgan'
 import helmet from 'helmet';
 import createHttperror from 'http-errors';
 
-import session from './session';
-import { errorHandler } from '../middlewares/errorHandler';
-import apiRoutes from '../routes/api';
-import passport from './passport';
+import session from './session.js';
+import { errorHandler } from '../middlewares/errorHandler.js';
+import apiRoutes from '../routes/api.js';
+import passport from './passport.js';
 
 const createServer = () => {
     const app = express();
@@ -30,10 +30,10 @@ const createServer = () => {
     app.use(passport.initialize());
     app.use(passport.session());
 
-    app.use(`/${process.env.API_ROUTES_PREFIX}`, apiRoutes);
-    app.get('/*', (req, res) => {
-        throw createHttperror(404, 'Page Not Found');
-    });
+    app.use('/', apiRoutes);
+    // app.get('/*', (req, res) => {
+    //     throw createHttperror(404, 'Page Not Found');
+    // });
 
     app.use(errorHandler);
     return app;

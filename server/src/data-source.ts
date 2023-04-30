@@ -1,6 +1,11 @@
 import { DataSource } from 'typeorm';
+import { Participant } from './entities/user.js';
+import { Quiz } from './entities/quiz.js';
+import { Question } from './entities/question.js'
+import { Option } from './entities/option.js';
+import { QuizAttempt } from './entities/quizAttempt.js';
 import dotenv from 'dotenv';
-import { Pool } from 'pg';
+// import { Pool } from 'pg';
 // import { join } from "path";
 
 export const AppDataSource = new DataSource({
@@ -9,7 +14,10 @@ export const AppDataSource = new DataSource({
     port: 5432,
     username: 'postgres',
     password: 'mysecretpassword',
-    database: 'quizdb',
+    database: 'nodejs',
+    synchronize: true,
+    entities: ["dist/entities/*.js"],
+    migrations: ["dist/migrations/*.js"]
 })
 
 // export const pool = new Pool({
