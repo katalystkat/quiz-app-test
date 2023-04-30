@@ -11,7 +11,7 @@ import { validateCreateBody } from './userValidators.js';
 const create = async (req: TypedRequestBody<UsersCreateBody>, res: Response)=> {
     const { username, email, password } = validateCreateBody(req.body);
     const queryRunner = AppDataSource.createQueryRunner();
-
+    console.log('inside user controller');
     // Connnect to db and start transaction
     await queryRunner.connect();
     await queryRunner.startTransaction();

@@ -14,19 +14,22 @@ const login = (
     res: Response<AuthLoginResponse>,
     next: NextFunction,
 ) => {
+    const { username, password } = req.body;
     validateLoginBody(req.body);
     passport.authenticate(
         'local',
-        (err: HttpError | null, user: Participant | undefined) => {
+        (err: HttpError | null, user: Participant) => {
             if (err){
                 return next(err);
             }
-
-            if (!user) {
-                return next(
-                    createHttpError(401, 'Incorrect credentials'),
-                );
-            }
+            // if (typeof password === 'string' && !((user as Participant).verifyPassword(password))) {
+            //     console.log('in verify')
+            //     return next();
+            // }            if (!user) {
+            //     return next(
+            //         createHttpError(401, 'Incorrect credentials'),
+            //     );
+            // }
 
             req.logIn(user, (err) => {
                 if (err) {

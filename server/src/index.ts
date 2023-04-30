@@ -11,19 +11,6 @@ const port = process.env.PORT || '8080';
 
 const app = createServer();
 
-// app.get('/home', async(req, res) => {
-//     try{
-//         const quizzes = await pool.query('SELECT * FROM quizdb')
-//         res.json(quizzes)
-//     } catch (err){
-//         console.log(err);
-//     }
-// })
-
-// app.listen(port, () => {
-//     console.log(`Server is running on PORT ${port}`)
-// })
-
 AppDataSource.initialize()
     .then(async () => {
         // Create test user data
@@ -34,4 +21,4 @@ AppDataSource.initialize()
     })
     .catch((err) => {
         console.error("Error during Data Source initialization: ", err)
-    })
+    });

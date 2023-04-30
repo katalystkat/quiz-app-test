@@ -4,8 +4,8 @@ import { AuthLoginBody } from '../../types/routes/auth.js';
 
 // handle login request body validation
 export const validateLoginBody = (body: Partial<AuthLoginBody>) => {
-    const { login, password } = body;
-    if (!login){
+    const { username, password } = body;
+    if (!username){
         throw createHttpError(400, 'Username or email address required');
     }
 

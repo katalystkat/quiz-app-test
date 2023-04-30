@@ -10,6 +10,14 @@ const questionRepository = AppDataSource.getRepository(Question);
 const optionRepository = AppDataSource.getRepository(Option);
 
 export const seedData = async () => {
+    // Check if data has been seeded already
+   const quizCount = await quizRepository.count();
+   const isSeeded = quizCount > 0;
+   if (isSeeded){
+    console.log('Data Previously Seeded')
+    return
+   }
+
   // Seed quiz data
   const quizzes: Partial<Quiz>[] = [
     {
