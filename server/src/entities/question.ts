@@ -2,11 +2,9 @@ import {
   Column,
   Entity,
   ManyToOne,
-  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Quiz } from './quiz.js';
-import { Option } from './option.js';
 
 @Entity()
 export class Question {
@@ -16,9 +14,7 @@ export class Question {
   @Column()
   text!: string;
 
-  @ManyToOne(() => Quiz, (quiz) => quiz.questions)
-  quiz!: Quiz;
+  @Column({ name: 'quiz_id' })
+  quizId!: string;
 
-  @OneToMany(() => Option, (option) => option.question, { cascade: true })
-  options!: Option[];
 }

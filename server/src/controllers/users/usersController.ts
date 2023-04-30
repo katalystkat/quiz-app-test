@@ -2,7 +2,7 @@ import { Response } from 'express';
 import createHttpError from 'http-errors';
 
 import { AppDataSource } from '../../data-source.js';
-import { Participant } from '../../entities/user.js';
+import { Participant } from '../../entities/participant.js';
 import { TypedRequestBody } from '../../types/express/express.js';
 import { UsersCreateBody } from '../../types/routes/users.js';
 import { validateCreateBody } from './userValidators.js';

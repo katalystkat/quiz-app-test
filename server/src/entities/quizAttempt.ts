@@ -7,7 +7,7 @@ import {
     PrimaryGeneratedColumn,
   } from 'typeorm';
   import { Quiz } from './quiz.js';
-  import { Participant } from './user.js';
+  import { Participant } from './participant.js';
   
   @Entity()
   export class QuizAttempt {

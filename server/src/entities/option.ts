@@ -4,7 +4,8 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { Question } from './question.js';
+
+import {Question} from './question.js';
 
 @Entity()
 export class Option {
@@ -20,7 +21,7 @@ export class Option {
   @Column({ name: 'question_id' })
   questionId!: string;
 
-  @ManyToOne(() => Question, (question) => question.options, { onDelete: 'CASCADE' })
+  @ManyToOne(() => Question)
   question!: Question;
 
   @Column({ name: 'option_index' })

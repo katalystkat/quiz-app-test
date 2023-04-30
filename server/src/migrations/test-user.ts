@@ -1,5 +1,5 @@
 import { MigrationInterface, QueryRunner } from 'typeorm';
-import { Participant } from '../entities/user.js';
+import { Participant } from '../entities/participant.js';
 
 export class AddTestParticipants1630455400271 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {

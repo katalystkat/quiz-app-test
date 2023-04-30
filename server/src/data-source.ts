@@ -1,5 +1,5 @@
 import { DataSource } from 'typeorm';
-import { Participant } from './entities/user.js';
+import { Participant } from './entities/participant.js';
 import { Quiz } from './entities/quiz.js';
 import { Question } from './entities/question.js'
 import { Option } from './entities/option.js';
@@ -14,7 +14,7 @@ export const AppDataSource = new DataSource({
     port: 5432,
     username: 'postgres',
     password: 'mysecretpassword',
-    database: 'nodejs',
+    database: 'bakery',
     synchronize: true,
     entities: ["dist/entities/*.js"],
     migrations: ["dist/migrations/*.js"]

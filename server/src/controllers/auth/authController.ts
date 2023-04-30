@@ -2,7 +2,7 @@ import {NextFunction, Request, Response} from 'express';
 import createHttpError, { HttpError } from 'http-errors';
 import passport from 'passport';
 
-import { Participant } from '../../entities/user.js';
+import { Participant } from '../../entities/participant.js';
 import { TypedRequestBody } from '../../types/express/express.js';
 import { AuthLoginBody, AuthLoginResponse } from '../../types/routes/auth.js';
 import { validateLoginBody } from './authValidators.js';

@@ -4,7 +4,7 @@
     "port": 5432,
     "username": "postgres",
     "password": "mysecretpassword",
-    "database": "quizdb",
+    "database": "bakery",
     "entities": ["src/entities/*.ts"],
     "migrations": ["src/migrations/*.ts"],
     "cli": {

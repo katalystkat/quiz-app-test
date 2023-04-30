@@ -3,7 +3,7 @@ import passport from 'passport';
 import { Strategy as LocalStrategy } from 'passport-local';
 
 import { AppDataSource } from '../data-source.js';
-import { Participant } from '../entities/user.js';
+import { Participant } from '../entities/participant.js';
 
 // Using Local authentication to check if user exists in db and if password matches user's stored password
 
