@@ -8,13 +8,17 @@ const router = express.Router();
 // Registers new user in database, returns userID 
 router.route('/register').post(UsersController.create);
 // router.route('/registerMail').post(); // Sends Email 
-router.route('/authenticate').post((req, res) => res.end()); // authenticates user
-router.route('/login').post(UsersController.login); // login in app
+router.route('/authenticate').post(
+    UsersController.verifyUser, (req, res) => res.end()); // authenticates user
+router.route('/login').post(
+    UsersController.verifyUser,
+    UsersController.login
+    ); // login in app
 
 // Get Methods
-router.route('/generateOTP').get(UsersController.generateOTP) //generate OTP
-router.route('/verifyOTP').get(UsersController.verifyOTP) // verify generated OTP
-router.route('/createResetSession').get(UsersController.createResetSession); //reset variables
+// router.route('/generateOTP').get(UsersController.generateOTP) //generate OTP
+// router.route('/verifyOTP').get(UsersController.verifyOTP) // verify generated OTP
+// router.route('/createResetSession').get(UsersController.createResetSession); //reset variables
 
 export default router;
 

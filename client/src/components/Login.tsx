@@ -1,28 +1,51 @@
-import React from 'react'
-import {Link} from 'react-router-dom'
+import React, {useState} from 'react'
+import {Link, Navigate, useNavigate } from 'react-router-dom'
 import logo from '../assets/logo.png';
 import styles from '../styles/login.module.css';
 import { Toaster } from 'react-hot-toast';
 import { useFormik } from 'formik';
 import { usernameValidate, passwordValidate } from '../helper/validate'
+import { authenticate, loginUser } from '../helper/apiCalls';
+import jwt_decode from 'jwt-decode'
+import { useAppDispatch } from '../redux/hooks';
+import { setUserId } from '../redux/reducers/resultsReducer';
+import Token from '../types/tokenTypes';
 type Props = {}
 
 
 export default function Login({}: Props) {
 
     // update formik helper functions to be combined into one validation function
-  const formik = useFormik({
-    initialValues: {
-        username: '',
-        password: '',
-    },
-    validate: passwordValidate, 
-    validateOnBlur: false,
-    validateOnChange: false,
-    onSubmit: async values =>{
-        console.log(values)
+    // const history = useHistory();
+    const dispatch = useAppDispatch();
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const formik = useFormik({
+        initialValues: {
+            username: '',
+            password: '',
+        },
+        validate: passwordValidate, 
+        validateOnBlur: false,
+        validateOnChange: false,
+        onSubmit: async values =>{
+            try{ 
+                const response = await loginUser(values);
+                if (response.data && response.data.token){
+                    const token = response.data.token;
+                    sessionStorage.setItem('token', token);
+                    const decodedToken: Token = jwt_decode(token);
+                    const userId = decodedToken.userId;
+                    dispatch(setUserId(userId));
+                    setIsLoggedIn(true);
+                }
+            } catch (error) {
+                console.log(error)
+            }
+        }
+    });
+    if (isLoggedIn){
+       <Navigate to="/quiz"/>
     }
-  })
   return (
     <div className="container mx-auto">
         <Toaster position ="top-center" reverseOrder={false}></Toaster>
@@ -39,7 +62,9 @@ export default function Login({}: Props) {
                     <div className="textbox flex flex-col items-center gap-6">
                         <input {...formik.getFieldProps('username')} className={styles.textbox} type="text" placeholder="Username"/>
                         <input {...formik.getFieldProps('password')} className={styles.textbox} type="password" placeholder="Password"/>
-                        <button className={styles.btn} type="submit"><Link to="/quiz">Login</Link></button>
+                        <button className={styles.btn} type="submit">
+                            <Link to="/quiz">Login</Link>
+                        </button>
                     </div>
                     <div className="text-center py-4">
                         <span> <Link className="text-xl text-green-800" to="/register">Register Instead</Link></span>

@@ -1,14 +1,14 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface resultState{
-    userId: number,
+    userId: string,
     result : {
         [questionId: number]: number | undefined;
     },
 }
 
 const initialState: resultState = {
-    userId: 0,
+    userId: "user0",
     result: {}
 }
 
@@ -16,7 +16,7 @@ export const resultsSlice = createSlice({
     name : 'result',
     initialState,
     reducers : {
-        setUserId : (state, action: PayloadAction<number>) => {
+        setUserId : (state, action: PayloadAction<string>) => {
             return{
                 ...state,
                 userId: action.payload
@@ -35,7 +35,7 @@ export const resultsSlice = createSlice({
         },
         resetResultAction : () => {
             return{
-                userId: 0,
+                userId: " ",
                 result: []
             }
         }

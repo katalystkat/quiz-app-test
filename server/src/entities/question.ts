@@ -17,4 +17,6 @@ export class Question {
   @Column({ name: 'quiz_id' })
   quizId!: string;
 
+  @Column({ name: 'questionId'})
+  questionId!: string;
 }

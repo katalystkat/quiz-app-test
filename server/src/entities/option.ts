@@ -26,4 +26,7 @@ export class Option {
 
   @Column({ name: 'option_index' })
   optionIndex!: number;
+
+  @Column({ name: 'quiz_id'})
+  quizId!: string;
 }

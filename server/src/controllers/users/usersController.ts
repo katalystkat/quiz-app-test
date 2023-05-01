@@ -54,10 +54,26 @@ const create = async (req: TypedRequestBody<UsersCreateBody>, res: Response) => 
         await queryRunner.release();
     }
 };
+
+const verifyUser = async (req: TypedRequestBody<UsersCreateBody>, res: Response, next: NextFunction) => {
+    const { username  } = req.body;
+    try{ 
+      // find user in the database
+      const userRepo = AppDataSource.getRepository(Participant);
+      const user = await userRepo.findOneBy({ username });
+      if (!user) {
+        return next(createHttpError(404, 'user does not exist'));
+      }
+      next();
+    } catch (error){
+        return next(createHttpError(404, 'user verification error'));
+    }
+}
+    
 const login = async (req: TypedRequestBody<UsersCreateBody>, res: Response, next: NextFunction) => {
     const { username, password } = req.body;
     validateLoginBody(req.body);
-  
+    console.log("in login controller");
     try {
       // find user in the database
       const userRepo = AppDataSource.getRepository(Participant);
@@ -67,6 +83,7 @@ const login = async (req: TypedRequestBody<UsersCreateBody>, res: Response, next
       }
       // verify user password
       if (password !== undefined){
+        console.log('in password verification block');
         const isPasswordValid = user.verifyPassword(password);
         const token = jwt.sign({
             userId: user.id,
@@ -82,29 +99,6 @@ const login = async (req: TypedRequestBody<UsersCreateBody>, res: Response, next
     }
   }
   
-
-// POST: http://localhost:8080/users/login
-// const login = async (req: TypedRequestBody<UsersCreateBody>, res: Response)=> {
-//     const { username, password } = req.body;
-//     const queryRunner = AppDataSource.createQueryRunner();
-
-//     // Connect the query runner to the database and start the transaction
-//     await queryRunner.connect();
-//     await queryRunner.startTransaction();
-//     validateLoginBody(req.body);
-//     try {
-//         const userRepo = queryRunner.manager.getRepository(Participant);
-//         const currentUser = await userRepo.findOneBy({ username: username });
-//         if (currentUser){
-            
-//         }
-    
-
-//     } catch (error){
-//         return res.status(500).send(error)
-//     }
-//     res.json('Login route');
-// }
 // GET: http://localhost:8080/users/generateOTP
 const generateOTP = async (req: TypedRequestBody<UsersCreateBody>, res: Response)=> {
     res.json('generateOTP route');
@@ -122,5 +116,5 @@ const createResetSession = async (req: TypedRequestBody<UsersCreateBody>, res: R
 }
 
 export default {
-    create, login, generateOTP, verifyOTP, createResetSession
+    create, login, verifyUser, generateOTP, verifyOTP, createResetSession
 };
