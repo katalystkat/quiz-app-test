@@ -39,14 +39,19 @@ export class Participant {
     // }
     
     verifyPassword(password: string) {
-        console.log('salt: '+this.salt)
-        console.log('password: '+ password);
-        const hashPassword = bcrypt.hashSync(password ?? '', this.salt);
-        // const hashPassword = bcrypt.hashSync(password ?? '', this.salt);
-        console.log('hashed password: '+ hashPassword)
-        const hash = bcrypt.compareSync(password, this.salt);
-        return hash;
+        const hash = bcrypt.hashSync(password, this.salt);
+        return hash === this.hashPassword;
     }
+    
+    // verifyPassword(password: string) {
+    //     console.log('salt: '+this.salt)
+    //     console.log('password: '+ password);
+    //     const hashPassword = bcrypt.hashSync(password ?? '', this.salt);
+    //     // const hashPassword = bcrypt.hashSync(password ?? '', this.salt);
+    //     console.log('hashed password: '+ hashPassword)
+    //     const hash = bcrypt.compareSync(password, this.salt);
+    //     return hash;
+    // }
 
     validateFields() {
         if (!this.username || !this.hashPassword || !this.salt) {

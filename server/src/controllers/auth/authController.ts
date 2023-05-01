@@ -18,14 +18,13 @@ const login = (
     validateLoginBody(req.body);
     passport.authenticate(
         'local',
-        (err: HttpError | null, user: Participant) => {
+        (err: HttpError | null, user: Participant | undefined) => {
             if (err){
                 return next(err);
             }
-            if (typeof password === 'string' && !((user as Participant).verifyPassword(password))) {
-                console.log('in verify')
-                return next();
-            }            if (!user) {
+            console.log(user);
+            if (!user) {
+                console.log('no user');
                 return next(
                     createHttpError(401, 'Incorrect credentials'),
                 );

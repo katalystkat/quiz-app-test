@@ -1,4 +1,7 @@
 import createHttpError from 'http-errors';
+import { Connection } from 'typeorm/connection/Connection';
+import { Repository } from 'typeorm/repository/Repository';
+import { Participant } from '../../entities/participant';
 
 import { UsersCreateBody } from '../../types/routes/users';
 

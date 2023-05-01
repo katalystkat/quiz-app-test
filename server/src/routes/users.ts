@@ -3,20 +3,18 @@ import { Request, Response, NextFunction } from 'express';
 import UsersController from '../controllers/users/usersController.js';
 
 const router = express.Router();
-// should rename this as register route
-// userse controller is registering new users , returns user ID;
-router.route('/').post(UsersController.create);
-// works correctly 
-
 
 // POST Methods
-router.route('/register').post((req, res) => {
-    console.log('in register route');
-    res.json('register route')
-});
+// Registers new user in database, returns userID 
+router.route('/register').post(UsersController.create);
+// router.route('/registerMail').post(); // Sends Email 
+router.route('/authenticate').post((req, res) => res.end()); // authenticates user
+router.route('/login').post(UsersController.login); // login in app
+
 // Get Methods
-router.get('/',  (req: Request, res : Response, next : NextFunction) => {
-    console.log('register get')
-});
+router.route('/generateOTP').get(UsersController.generateOTP) //generate OTP
+router.route('/verifyOTP').get(UsersController.verifyOTP) // verify generated OTP
+router.route('/createResetSession').get(UsersController.createResetSession); //reset variables
 
 export default router;
+

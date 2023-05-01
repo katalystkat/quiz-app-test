@@ -9,8 +9,8 @@ router.get('/',  (req: Request, res : Response, next : NextFunction) => {
     console.log('auth')
   });
 router.route('/login').post(isUnauthenticated, AuthController.login);
-// router.route('/logout').post(isAuthenticated, AuthController.logout);
-// router.route('/authenticated').get(AuthController.authenticated);
+router.route('/logout').post(isAuthenticated, AuthController.logout);
+router.route('/authenticated').get(AuthController.authenticated);
 
 export default router;
 
