@@ -1,6 +1,7 @@
 import { NextFunction, Response } from 'express';
 import createHttpError, { HttpError }from 'http-errors';
 import passport from 'passport';
+import jwt from 'jsonwebtoken';
 import { AppDataSource } from '../../data-source.js';
 import { Participant } from '../../entities/participant.js';
 import { TypedRequestBody } from '../../types/express/express.js';
@@ -62,29 +63,21 @@ const login = async (req: TypedRequestBody<UsersCreateBody>, res: Response, next
       const userRepo = AppDataSource.getRepository(Participant);
       const user = await userRepo.findOneBy({ username });
       if (!user) {
-        return next(createHttpError(401, 'Incorrect credentials'));
+        return next(createHttpError(401, 'user does not exist'));
       }
-  
       // verify user password
       if (password !== undefined){
         const isPasswordValid = user.verifyPassword(password);
-      }
-        else {
-        return next(createHttpError(401, 'Incorrect credentials'));
-        }
-  
-      // if the user exists and the password is correct, authenticate the user
-      req.login(user, (err) => {
-        if (err) {
-          return next(err);
-        }
-        return res.send({
-          id: user.id,
-          username: user.username,
-          email: user.email,
+        const token = jwt.sign({
+            userId: user.id,
+            username: user.username 
+        }, 'secret', {expiresIn : "24h" });
+        return res.status(200).send({
+            msg: "Login Successful, Token Generated",
+            username: user.username,
+            token
         })
-      })
-    } catch (error) {
+      }} catch (error) {
       return next(error);
     }
   }

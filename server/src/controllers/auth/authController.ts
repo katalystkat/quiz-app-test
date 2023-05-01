@@ -53,9 +53,9 @@ const logout = (
         if (err) { 
             return next(err);
         }
-        // req.session.destroy(()=> {
-        //     return res.send();
-        // });
+        req.session.destroy(()=> {
+            return res.send();
+        });
     });
 };
 
