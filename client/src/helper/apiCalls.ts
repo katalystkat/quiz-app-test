@@ -93,7 +93,6 @@ export const logQuizAttempt = async (userId: string, quizId: string, score: numb
 // Get QuizAttempts
 export const getQuizAttempts = async (username: string) => {
     try{
-        console.log("trying to get quiz attempts api call front end");
         const response =  await axiosInstance.get('/quiz/getQuizAttempts')
         return response.data;
     } catch (error){

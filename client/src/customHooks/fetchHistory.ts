@@ -20,7 +20,7 @@ interface AttemptDetails {
             "quiz_id_1",
              attemptDetails.userScore,
         )
-        return HistoryAction.addHistoryAction({attemptDetails});
+        return dispatch(HistoryAction.addHistoryAction({attemptDetails}));
     } catch (error) {
         console.log(error);
         throw error;
@@ -31,11 +31,8 @@ interface AttemptDetails {
 export const getHistoryAction =  (userId: string) => async (dispatch: ThunkDispatch<RootState, undefined, Action>): Promise<Action> =>{
     try {
         const response = await getQuizAttempts(userId)
-        console.log("trying to get History");
-        console.log(response);
         const attemptDetails = response.data;
-        return HistoryAction.getHistoryAction({attemptDetails})
-        // return HistoryAction.addHistoryAction({ attemptDetails });
+        return dispatch(HistoryAction.getHistoryAction({attemptDetails}));
     } catch (error) {
         console.log(error);
         throw error;

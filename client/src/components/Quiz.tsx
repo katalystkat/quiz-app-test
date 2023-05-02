@@ -32,7 +32,7 @@ export default function Quiz({}: Props) {
             await dispatch(AddQuizResult(trace, check));
             const score = await calculateScore(result, state.answer.answers)
             // await dispatch(AddHistoryAction("attemptId", {userId: userId, date: formattedDate, userResults: result, userScore: score.percentage} ))
-            console.log(state)
+            // console.log(state)
             navigate('/results', {replace: true});
         }
     }

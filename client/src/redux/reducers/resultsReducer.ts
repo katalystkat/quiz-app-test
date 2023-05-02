@@ -23,7 +23,6 @@ export const resultsSlice = createSlice({
             }
         },
         addResultAction: (state, action: PayloadAction<{ questionId: number, userChoice: number | undefined }>) => {
-            console.log('result reducer: '+ state);
             const { questionId, userChoice } = action.payload;
             return {
                 ...state,

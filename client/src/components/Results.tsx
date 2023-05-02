@@ -27,16 +27,19 @@ export default function Results({}: Props) {
     useEffect(() => {
         const addHistory = async () => {
           const score = calculateScore(results, answers);
-          const userId = localStorage.getItem('userId') || 'default_userId'
-          console.log('attempting to log new quiz info to' + userId);
+          const userId = localStorage.getItem('userId') || 'default_userId';
+          const date = new Date();
+          // console.log('attempting to log new quiz info to' + userId);
+          // console.log('before dispatch addHistry action, inside useEffect');
           await dispatch(
             AddHistoryAction(userId, {
               userId: userId,
-              date: "date",
+              date: date.toLocaleDateString(),
               userResults: results,
               userScore: score.percentage
             })
           );
+          // console.log("after we dispatch addHistoryAction")
         };
         addHistory();
       }, []);
@@ -55,7 +58,7 @@ export default function Results({}: Props) {
                 <span>Kat</span>
             </div>
             <div className="flex" >
-                <span>Total Quiz Points:</span>
+                <span>Total Quiz Points: </span>
                 <span>{score.percentage}</span>
             </div>
             <div className="flex" >

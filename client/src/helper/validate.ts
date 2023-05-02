@@ -12,7 +12,6 @@ export async function passwordValidate(values: any){
 }
 
 export async function registerValidate(values: any){
-    console.log('in register validate')
     const errors = usernameVerify({username: "string", password: "string", email: "string"}, values);
     passwordVerify(errors, values);
     emailVerify(errors, values);

@@ -14,9 +14,10 @@ export function calculateScore(userAnswers: Answers, correctAnswers: Answers) {
         }
       }
     }
-    console.log('correctCount: ' + correctCount);
-    const percentage = (correctCount / totalQuestions) * 100;
-    console.log('percentage: '+percentage)
+    // console.log('correctCount: ' + correctCount);
+    let percentage = (correctCount / totalQuestions) * 100;
+    if (correctCount === 0) percentage = 0;
+    // console.log('percentage: '+percentage)
     return {
       correctCount,
       totalQuestions,

@@ -31,24 +31,15 @@ export default function Login({}: Props) {
         validateOnBlur: false,
         validateOnChange: false,
         onSubmit: async values =>{
-            console.log(values)
+            // console.log(values)
             try{ 
-                console.log('log in button clicked')
+                // console.log('log in button clicked')
                 const response = await loginUser(values);
-                // if (response.data && response.data.token){
-                //     const token = response.data.token;
-                //     sessionStorage.setItem('token', token);
-                //     const decodedToken: Token = jwt_decode(token);
-                //     const userId = decodedToken.userId;
-                //     console.log('in if block')
-                //     dispatch(setUserId(userId));
-                //     setIsLoggedIn(true);
-                //     Navigate({ to:'/quiz'})
-                // }
                 if (response.data) {
                     const userId = response.data.id;
                     localStorage.setItem('userId', userId);
-                    console.log('localStorage success: ' + localStorage.getItem('userId'))
+                    toast.success('Login Success! Please wait for redirect!')
+                    // console.log('localStorage success: ' + localStorage.getItem('userId'))
                     setIsLoggedIn(true);
                     navigate('/quiz');
                 } else {
