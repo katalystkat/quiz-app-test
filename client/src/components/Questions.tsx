@@ -11,19 +11,9 @@ export default function Questions({ onChecked }:Props) {
 
     const [checked, setChecked] = useState<string | undefined>(undefined)
     const [{ isLoading, apiData, serverError }] = useFetchQuestion()
-    const question = data[0]
-    
-    // const questions = useAppSelector(state => state.questions)
-
     const questions = useAppSelector(state => state.questions.queue[state.questions.trace])
     const trace = useAppSelector(state => state.questions.trace)
     useEffect(()=> {
-        // console.log(questions)
-        // console.log(questions?.question)
-        // console.log(trace)
-        // console.log(isLoading)
-        // console.log(apiData)
-        // console.log(serverError)
 
     });
 
@@ -31,14 +21,13 @@ export default function Questions({ onChecked }:Props) {
         onChecked(userAnswer)
         // console.log(userAnswer)
     }
-
-    if(isLoading) return <h3 className="text-light"> isLoading</h3>
-    if(serverError) return <h3 className="text-light"> Unknown error </h3>
+    // if(isLoading) return <h3 className="text-light"> isLoading</h3>
+    // if(serverError) return <h3 className="text-light"> Unknown error </h3>
 
   return (
     <div className='questions-container'>
         <h2 className='text-light'>{questions?.question}</h2>
-        <ul key={questions?.id}>
+        <ul key={trace}>
             {
                 questions?.answers.map((question, index)=> (
                     <li key={index}>

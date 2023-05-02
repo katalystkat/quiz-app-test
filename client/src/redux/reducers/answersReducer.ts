@@ -17,10 +17,10 @@ const answerSlice = createSlice({
   name: 'answers',
   initialState,
   reducers: {
-    addAnswerAction: (state, action: PayloadAction<Answer>) => {
-      const { questionId, answer } = action.payload;
-      state.answers[questionId] = answer;
-    },
+    // addAnswerAction: (state, action: PayloadAction<Answer>) => {
+    //   const { questionId, answer } = action.payload;
+    //   state.answers[questionId] = answer;
+    // },
     setAnswersAction: (state, action: PayloadAction<Record<number, number | undefined>>) => {
       state.answers = action.payload;
     },
@@ -30,5 +30,5 @@ const answerSlice = createSlice({
   },
 });
 
-export const { addAnswerAction, setAnswersAction, clearAnswersAction } = answerSlice.actions;
+export const { setAnswersAction, clearAnswersAction } = answerSlice.actions;
 export default answerSlice.reducer;

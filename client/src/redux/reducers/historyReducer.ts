@@ -1,13 +1,14 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface AttemptDetails {
+  userId: string,
   date: string,
   userResults: Record<number, number | undefined>;
   userScore: number
 }
 
 interface AttemptHistory {
-    [attemptId: string]: AttemptDetails;
+    [attemptId: number]: AttemptDetails;
 }
 
 interface HistoryState {
@@ -20,6 +21,7 @@ const initialState: HistoryState = {
     attemptHistory: {
         0: {
         date: "",
+        userId: "test",
         userResults: {},
         userScore: 0,
         },
@@ -30,7 +32,16 @@ export const historySlice = createSlice({
     name: 'history',
     initialState,
     reducers: {
-      addHistoryAction: (state, action: PayloadAction<{ attemptId: string; attemptDetails: AttemptDetails }>) => {
+      addHistoryAction: (state, action: PayloadAction<{ attemptDetails: AttemptDetails }>) => {
+          const { attemptDetails } = action.payload;
+          const attemptId = state.attemptCounter;
+          state.attemptHistory = {
+            ...state.attemptHistory,
+            [attemptId]: attemptDetails,
+          };
+          state.attemptCounter++;
+        },
+        getHistoryAction: (state, action: PayloadAction<{ attemptDetails: AttemptDetails }>) => {
           const { attemptDetails } = action.payload;
           const attemptId = state.attemptCounter;
           state.attemptHistory = {
@@ -43,5 +54,5 @@ export const historySlice = createSlice({
     });
 
 
-export const { addHistoryAction } = historySlice.actions;
+export const { addHistoryAction, getHistoryAction } = historySlice.actions;
 export default historySlice.reducer;

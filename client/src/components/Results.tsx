@@ -5,31 +5,44 @@ import {Link} from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../redux/hooks';
 import { resetQuizAction } from '../redux/reducers/questionReducer';
 import { resetResultAction } from '../redux/reducers/resultsReducer';
-import { useFetchAnswers } from '../customHooks/fetchAnswers';
+import { useFetchAnswers } from '../customHooks/fetchQuestions';
 import { AddHistoryAction } from '../customHooks/fetchHistory';
 import { calculateScore } from '../helper/scoring'
 
 type Props = {}
 
 export default function Results({}: Props) {
+    const [{isLoading, apiData, serverError}] = useFetchAnswers();
     const state = useAppSelector(state => state)
     const answers = useAppSelector(state => state.answer.answers)
     const results = useAppSelector(state => state.result.result)
     const dispatch = useAppDispatch();
-    
+    //TODO need to get userID from storage, and replace line 32
     function onRestart(){
         // console.log('on restart')
         dispatch(resetQuizAction());
         dispatch(resetResultAction());
     }
-    
+    // Only posting new result to db once
     useEffect(() => {
-        // console.log(state)
-        console.log(state)
-    }, [state, state.history]);
+        const addHistory = async () => {
+          const score = calculateScore(results, answers);
+          const userId = localStorage.getItem('userId') || 'default_userId'
+          console.log('attempting to log new quiz info to' + userId);
+          await dispatch(
+            AddHistoryAction(userId, {
+              userId: userId,
+              date: "date",
+              userResults: results,
+              userScore: score.percentage
+            })
+          );
+        };
+        addHistory();
+      }, []);
 
-    const [{isLoading, apiData, serverError}] = useFetchAnswers();
     const score = calculateScore(results, answers)
+    
     if(isLoading) return <h3 className="text-light"> isLoading</h3>
     if(serverError) return <h3 className="text-light"> Unknown error </h3>
 

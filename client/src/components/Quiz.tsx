@@ -12,13 +12,14 @@ type Props = {}
 export default function Quiz({}: Props) {
     const state = useAppSelector(state => state)
     const result = useAppSelector(state => state.result.result)
-    const dispatch = useAppDispatch()
+    const { queue, trace } = useAppSelector(state => state.questions);
     const [check, setChecked] = useState<number | undefined>(undefined)
     const [lastQuestion, setLastQuestion] = useState(false)
-    const { queue, trace } = useAppSelector(state => state.questions);
     const navigate = useNavigate();
+    const dispatch = useAppDispatch()
     const date = new Date();
     const formattedDate = date.toLocaleString();
+    const userId = localStorage.getItem('userId') || 'default_user';
 
     async function onNext(){
         if(trace < queue.length){
@@ -30,7 +31,7 @@ export default function Quiz({}: Props) {
         else if (lastQuestion){
             await dispatch(AddQuizResult(trace, check));
             const score = await calculateScore(result, state.answer.answers)
-            await dispatch(AddHistoryAction("attemptid", {date: formattedDate, userResults: result, userScore: score.percentage} ))
+            // await dispatch(AddHistoryAction("attemptId", {userId: userId, date: formattedDate, userResults: result, userScore: score.percentage} ))
             console.log(state)
             navigate('/results', {replace: true});
         }
