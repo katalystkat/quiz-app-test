@@ -22,6 +22,8 @@ Make sure you have installed the following software:
 - [Node.js](https://nodejs.org/en/)
 - [Docker](https://www.docker.com/)
 
+Have a great attitude to learn! 
+
 ### Installation
 
 1. Clone the repository:
