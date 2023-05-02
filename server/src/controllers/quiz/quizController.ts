@@ -9,6 +9,7 @@ import createHttpError from 'http-errors';
 // get quiz answers
 
 const getQuizData = async (req: Request, res: Response, next: NextFunction) => {
+    console.log('in getquizData');
     const { quizId } = req.body
     try {
       // find user in the database

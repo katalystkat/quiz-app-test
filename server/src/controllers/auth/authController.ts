@@ -14,7 +14,6 @@ const login = (
     res: Response<AuthLoginResponse>,
     next: NextFunction,
 ) => {
-    const { username, password } = req.body;
     validateLoginBody(req.body);
     passport.authenticate(
         'local',

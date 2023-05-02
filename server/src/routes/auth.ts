@@ -6,15 +6,11 @@ import { isAuthenticated, isUnauthenticated, Authenticate } from '../middlewares
 const router = express.Router();
 
 router.get('/',  (req: Request, res : Response, next : NextFunction) => {
-    console.log('auth')
+    console.log('auth');
+    res.end();
   });
 router.route('/login').post(isUnauthenticated, AuthController.login);
 router.route('/logout').post(isAuthenticated, AuthController.logout);
 router.route('/authenticated').get(AuthController.authenticated);
 
 export default router;
-
-
-// router.get('/',  (req: Request, res : Response, next : NextFunction) => {
-//     console.log('quizRoute')
-//   });

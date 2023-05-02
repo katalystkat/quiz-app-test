@@ -10,16 +10,16 @@ import { Participant } from '../entities/participant.js';
 passport.use(
     new LocalStrategy(
         {
-            usernameField: 'login',
+            usernameField: 'username',
             passwordField: 'password',
         },
-        async (login, password, done) => {
+        async (username, password, done) => {
             try {
                 const userRepo = AppDataSource.getRepository(Participant);
                 
                 // Search a user whose username is the login parameter
                 const user = await userRepo.findOne({
-                    where: [{ username: login }, { email: login}],
+                    where: [{ username: username }],
                 });
 
                 // If the user doesn't exist or the password is wrong, return error as null and user as null
@@ -45,7 +45,6 @@ passport.serializeUser((user: any, done: any) => {
 passport.deserializeUser(async (req: Request, id: string, done: any) => {
     const userRepo = AppDataSource.getRepository(Participant);
     const user = await userRepo.findOneBy({ id });
-
     if (!user) {
         // if passport tries to deserialize user but id doesn't exist anymore in db,
         // it means the user has been deleted, so logout the request

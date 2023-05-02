@@ -14,6 +14,7 @@ const addQuizAttempt = async (
     next: NextFunction,
   ) => {
     try {
+      console.log('in addQuizAttempt Controller');
       const { userId, quizId, score } = req.body;
       // check if the participant exists
       const participantRepo = AppDataSource.getRepository(Participant);
@@ -51,6 +52,7 @@ const getQuizAttempts = async (req: Request, res: Response, next: NextFunction) 
     const { userID } = req.body
     try {
       // find user in the database
+      console.log(userID)
         const quizAttemptsRepo = AppDataSource.getRepository(QuizAttempt);
         const quizAttempts = await quizAttemptsRepo.find({
             where: { user: { id: userID} },

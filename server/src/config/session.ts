@@ -1,6 +1,5 @@
 import session from 'express-session';
 import pgSession from 'connect-pg-simple';
-
 const sessionStore = process.env.NODE_ENV === 'test' ? undefined : new (pgSession(session))({
     conObject: {
         host: process.env.DB_HOST,
