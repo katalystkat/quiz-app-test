@@ -25,7 +25,7 @@ const login = (
             if (!user) {
                 console.log('no user');
                 return next(
-                    createHttpError(401, 'Incorrect credentials'),
+                    createHttpError(401, 'User not found in database'),
                 );
             }
 

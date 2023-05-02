@@ -5,12 +5,12 @@ import { Question } from './question.js';
 @Entity()
 export class Quiz {
   @PrimaryGeneratedColumn()
-  id: number;
+  id: string;
 
   @Column()
   name: string;
 
-  constructor(id: number, name: string, questions: Question[]) {
+  constructor(id: string, name: string, questions: Question[]) {
     this.id = id;
     this.name = name;
   }

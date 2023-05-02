@@ -13,9 +13,17 @@ const addQuizAttempt = async (
     res: Response,
     next: NextFunction,
   ) => {
+    const { userId, quizId, score } = req.body;
+    if (!userId || typeof userId !== 'string'){
+      return next(createHttpError(400, 'Invalid userId'))
+    }
+    if (!quizId || typeof quizId !== 'string'){
+      return next(createHttpError(400, 'Invalid quizId'))
+    }
+    if (!score || typeof score !== 'number'){
+      return next(createHttpError(400, 'Invalid score'))
+    }
     try {
-      console.log('in addQuizAttempt Controller');
-      const { userId, quizId, score } = req.body;
       // check if the participant exists
       const participantRepo = AppDataSource.getRepository(Participant);
       const participant = await participantRepo.findOne({
@@ -50,9 +58,11 @@ const addQuizAttempt = async (
 
 const getQuizAttempts = async (req: Request, res: Response, next: NextFunction) => {
     const { userID } = req.body
+    if (!userID || typeof userID !== 'string'){
+      return next(createHttpError(400, 'Invalid userId'))
+    }
     try {
       // find user in the database
-      console.log(userID)
         const quizAttemptsRepo = AppDataSource.getRepository(QuizAttempt);
         const quizAttempts = await quizAttemptsRepo.find({
             where: { user: { id: userID} },

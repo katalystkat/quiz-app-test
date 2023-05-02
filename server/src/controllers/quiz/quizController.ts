@@ -9,8 +9,10 @@ import createHttpError from 'http-errors';
 // get quiz answers
 
 const getQuizData = async (req: Request, res: Response, next: NextFunction) => {
-    console.log('in getquizData');
     const { quizId } = req.body
+    if (!quizId || typeof quizId !== 'string'){
+        return next(createHttpError(400, 'Invalid userId'))
+      }
     try {
       // find user in the database
         const quizRepo = AppDataSource.getRepository(Quiz);

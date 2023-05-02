@@ -78,9 +78,9 @@ export const loginUser = async ( values: {username: string, password: string}): 
 // Log Quiz Attempt
 export const logQuizAttempt = async (userId: string, quizId: string, score: number): Promise<any> => {
     try{
-        const response =  await axiosInstance.post('/quiz/newAttempt', 
-            { userId: userId, 
-              quizId: 1,
+        const response =  await axiosInstance.post('/quiz/addNewAttempt', 
+            { userId: userId,  
+              quizId: "1",
               score: score,
             }
         );

@@ -23,6 +23,7 @@ export default function Results({}: Props) {
         dispatch(resetQuizAction());
         dispatch(resetResultAction());
     }
+    // ASYNC PROBLEM HERE where we are savign to state the wrong score. 
     // Only posting new result to db once
     useEffect(() => {
         const addHistory = async () => {

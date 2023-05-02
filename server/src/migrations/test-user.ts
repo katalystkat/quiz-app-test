@@ -23,7 +23,7 @@ export class AddTestParticipants1630455400271 implements MigrationInterface {
         salt: 'salt',
       },
     ];
-
+    
     await queryRunner.manager.getRepository(Participant).save(participants);
   }
 
