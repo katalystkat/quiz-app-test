@@ -1,12 +1,10 @@
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
-const token = sessionStorage.getItem('token');
+// const token = sessionStorage.getItem('token');
 const BASE_URL = 'http://localhost:8080';
 
 const axiosInstance: AxiosInstance = axios.create({
     baseURL: 'http://localhost:8080',
-    headers: {
-        Authorization: `Bearer ${token}`,
-    }
+    withCredentials: true
 })
 // Make API Requests
 
@@ -25,10 +23,11 @@ export const authenticate = async (username: string): Promise<any> => {
 // Get QuizData 
 export const getQuizData = async (quizId: string): Promise<any> => {
     try{
-        const response =  await axiosInstance.post('/quiz/getQuiz', 
-            { quizId: quizId }
-        );
-        return response;
+        const response =  await axiosInstance.get('/quiz/getQuiz', { 
+            data: { quizId: quizId }
+    });
+        console.log(response.data)
+        return response.data;
     } catch (error){
         return {error: "unable to complete getQuizData apiCall"}
     }
@@ -37,32 +36,24 @@ export const getQuizData = async (quizId: string): Promise<any> => {
 // Get Quiz Answers
 export const getQuizAnswers = async (quizId: string): Promise<any> => {
     try{
-        const response =  await axiosInstance.post('/quiz/getQuizAnswers', 
-            { quizId: quizId }
-        );
+        const response =  await axiosInstance.get('/quiz/getQuizAnswers',{ 
+            data: {quizId: quizId}
+     });
         return response;
     } catch (error){
         return {error: "Quiz Answers does not exist"}
     }
 }
 
-// Get QuizAttempts
-export const getQuizAttempts = async (username: string) => {
-    try{
-        const response =  await axiosInstance.get('/quiz/getQuizAttempts')
-        return response;
-    } catch (error){
-        return {error: "Unable to complete get Quiz Attempts api call"}
-    }
-}
+
 
 // Register User
-export const registerUser = async (username: string, password: string, email: string): Promise<any> => {
+export const registerUser = async (values: {username: string, password: string, email: string}): Promise<any> => {
     try{
         const response =  await axiosInstance.post('/users/register', 
-            { username: username,
-              password: password,
-              email: email,
+            { username: values.username,
+              password: values.password,
+              email: values.email,
             }
         );
         return response;
@@ -74,7 +65,7 @@ export const registerUser = async (username: string, password: string, email: st
 // Login User 
 export const loginUser = async ( values: {username: string, password: string}): Promise<any> =>{
     try{
-        const response =  await axiosInstance.post('/users/register', 
+        const response =  await axiosInstance.post('/auth/login', 
             { username: values.username,
               password: values.password,
             }
@@ -87,14 +78,25 @@ export const loginUser = async ( values: {username: string, password: string}): 
 // Log Quiz Attempt
 export const logQuizAttempt = async (userId: string, quizId: string, score: number): Promise<any> => {
     try{
-        const response =  await axiosInstance.post('/users/register', 
+        const response =  await axiosInstance.post('/quiz/newAttempt', 
             { userId: userId, 
-              quizId: quizId,
+              quizId: 1,
               score: score,
             }
         );
         return response;
     } catch (error){
         return {error: "Unable to complete log quiz attempt api call"}
+    }
+}
+
+// Get QuizAttempts
+export const getQuizAttempts = async (username: string) => {
+    try{
+        console.log("trying to get quiz attempts api call front end");
+        const response =  await axiosInstance.get('/quiz/getQuizAttempts')
+        return response.data;
+    } catch (error){
+        return {error: "Unable to complete get Quiz Attempts api call"}
     }
 }
