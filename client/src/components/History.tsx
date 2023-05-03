@@ -7,7 +7,6 @@ export default function History({}: Props) {
     const { attemptHistory } = useAppSelector(state => state.history);
     const [isLoading, setIsLoading] = useState(true);
     let stateUserId = attemptHistory[0]["userId"];
-    console.log(attemptHistory)
 
     useEffect(() => {
       if (stateUserId !== "test") {

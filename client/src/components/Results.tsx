@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import History from './History';
 import {Link, useNavigate} from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../redux/hooks';
@@ -10,17 +10,20 @@ import { calculateScore } from '../helper/scoring'
 import { logoutUser } from '../helper/apiCalls';
 import toast from 'react-hot-toast'
 import styles from '../styles/home.module.css'
-type Props = {}
 
-export default function Results({}: Props) {
+type Props = {
+  setIsLoggedIn: (loggedIn: boolean) => void;
+}
+
+export default function Results({ setIsLoggedIn}: Props) {
     const [{isLoading, apiData, serverError}] = useFetchAnswers();
     const state = useAppSelector(state => state)
     const answers = useAppSelector(state => state.answer.answers)
     const results = useAppSelector(state => state.result.result)
+    const [hasAddedHistory, setHasAddedHistory] = useState(false)
     const dispatch = useAppDispatch();
     const navigate = useNavigate();//TODO need to get userID from storage, and replace line 32
     function onRestart(){
-        // console.log('on restart')
         dispatch(resetQuizAction());
         dispatch(resetResultAction());
     }
@@ -30,9 +33,8 @@ export default function Results({}: Props) {
         const response = await logoutUser();
         if (response) {
           toast.success('Logout Success, eating kiwi...');
-          console.log('pre-clearance: ' + localStorage);
-          localStorage.clear();
-          console.log('post-clearance: ' + localStorage);
+          await localStorage.clear();
+          setIsLoggedIn(false);
           navigate('/')
         } else {
           return toast.error('Unable to logout')
@@ -41,27 +43,47 @@ export default function Results({}: Props) {
         console.log(error);
       }
     }
-    // ASYNC PROBLEM HERE where we are savign to state the wrong score. 
-    // Only posting new result to db once
-    useEffect(() => {
-        const addHistory = async () => {
-          const score = calculateScore(results, answers);
-          const userId = localStorage.getItem('userId') || 'default_userId';
-          const date = new Date();
-          // console.log('attempting to log new quiz info to' + userId);
-          // console.log('before dispatch addHistry action, inside useEffect');
-          await dispatch(
-            AddHistoryAction(userId, {
-              userId: userId,
-              date: date.toLocaleDateString(),
-              userResults: results,
-              userScore: score.percentage
-            })
-          );
-          // console.log("after we dispatch addHistoryAction")
-        };
-        addHistory();
-      }, []);
+
+  useEffect(() => {
+    if (Object.keys(results).length > 0 && Object.keys(answers).length > 0 && !hasAddedHistory) {
+      console.log("first quiz result");
+      const addHistory = async () => {
+        const score = calculateScore(results, answers);
+        const userId = localStorage.getItem("userId") || "default_userId";
+        const date = new Date();
+        await dispatch(
+          AddHistoryAction(userId, {
+            userId: userId,
+            date: date.toLocaleDateString(),
+            userResults: results,
+            userScore: score.percentage,
+          })
+        );
+        setHasAddedHistory(true);
+      };
+      addHistory();
+    }
+  }, [results, answers, hasAddedHistory]);
+// above is most recent
+
+
+  // useEffect(() => {
+  //   console.log('first quiz result');
+  //     const addHistory = async () => {
+  //       const score = calculateScore(results, answers);
+  //       const userId = localStorage.getItem('userId') || 'default_userId';
+  //       const date = new Date();
+  //       await dispatch(
+  //         AddHistoryAction(userId, {
+  //           userId: userId,
+  //           date: date.toLocaleDateString(),
+  //           userResults: results,
+  //           userScore: score.percentage
+  //         })
+  //       );
+  //     };
+  //     addHistory();
+  //   }, []);
 
     const score = calculateScore(results, answers)
     

@@ -12,35 +12,33 @@ import jwt_decode from 'jwt-decode'
 import { useAppDispatch } from '../redux/hooks';
 import { setUserId } from '../redux/reducers/resultsReducer';
 import Token from '../types/tokenTypes';
-type Props = {}
+type Props = {
+    setIsLoggedIn: (loggedIn: boolean) => void;
+}
 
 
-export default function Login({}: Props) {
+export default function Login({setIsLoggedIn}:Props) {
 
     // update formik helper functions to be combined into one validation function
     // const history = useHistory();
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
     const formik = useFormik({
         initialValues: {
             username: '',
             password: '',
         },
-        // validate: passwordValidate, 
+        // validate: passwordValidate,
         validateOnBlur: false,
         validateOnChange: false,
         onSubmit: async values =>{
-            // console.log(values)
             try{ 
-                // console.log('log in button clicked')
                 const response = await loginUser(values);
                 if (response.data) {
                     const userId = response.data.id;
                     localStorage.setItem('userId', userId);
                     toast.success('Login Success! Please wait for redirect!')
-                    // console.log('localStorage success: ' + localStorage.getItem('userId'))
-                    setIsLoggedIn(true);
+                    setIsLoggedIn(true)
                     navigate('/quiz');
                 } else {
                     return toast.error("Invalid Login Credentials!")
@@ -60,8 +58,6 @@ export default function Login({}: Props) {
                     <span className="text-xl text-center w-2/3">Quiz Information and introduction</span>
                 </div>
                 <form className="py-1" onSubmit={formik.handleSubmit}>
-                {/* <form className="py-1" onSubmit={()=>{console.log('onsubmit')}}> */}
-
                     <div className="logo flex justify-center py-4">
                         <img src={logo} className={styles.logo_img} alt="logo of a plant" />
                     </div>

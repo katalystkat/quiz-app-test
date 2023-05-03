@@ -19,7 +19,6 @@ export default function Questions({ onChecked }:Props) {
 
     const onSelect = (userAnswer : number) => {
         onChecked(userAnswer)
-        // console.log(userAnswer)
     }
     if(isLoading) return <h3 className="text-light"> isLoading</h3>
     if(serverError) return <h3 className="text-light"> Unknown error </h3>

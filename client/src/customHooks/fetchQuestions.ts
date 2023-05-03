@@ -49,7 +49,6 @@ export const useFetchQuestion = (): [FetchQuestionData, React.Dispatch<SetStateA
         ( async ()=> {
             try{ 
                 const data = await getQuizData("1");
-                console.log(data);
                 if(Object.keys(data).length > 0){
                     setGetData(prev=> ({
                         ...prev,
@@ -121,7 +120,6 @@ export const useFetchAnswers = (): [FetchQuestionData, React.Dispatch<SetStateAc
                         apiData: data,
                     }));
                     const formattedQuestions = formatQuestions(data);
-                    console.log('formatted answers: '+formatAnswerKey(formattedQuestions))
                     dispatch(ResultsAction.setAnswersAction(formatAnswerKey(formattedQuestions)))
                 } else {
                     throw new Error("No Answers Available")

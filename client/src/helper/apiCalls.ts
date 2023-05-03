@@ -26,10 +26,8 @@ export const getQuizData = async (quizId: string): Promise<any> => {
       const response = await axiosInstance.get('/quiz/getQuiz', {
         params: {quizId: quizId}
       });
-      console.log(response.data)
       return response.data;
     } catch (error) {
-      console.log(error);
       return { error: "unable to complete getQuizData apiCall" };
     }
   };
@@ -88,14 +86,12 @@ export const logoutUser = async (): Promise<any> =>{
 // Log Quiz Attempt
 export const logQuizAttempt = async (userId: string, quizId: string, score: number): Promise<any> => {
     try{
-        console.log('pre addNewAttempt api call')
         const response =  await axiosInstance.post('/quiz/addQuizAttempts', 
             { userId: userId,  
               quizId: "1",
               score: score,
             }
         );
-        console.log('logquizattempt response'+ response);
         return response;
     } catch (error){
         return {error: "Unable to complete log quiz attempt api call"}

@@ -13,7 +13,6 @@ type Props = {}
 export default function Register({}: Props) {
     const [isRegistered, setRegistered ] = useState(false);
     const handleClick = (event:any) => {
-        console.log(event);
         event.preventDefault();
         formik.handleSubmit();
     }
@@ -28,9 +27,6 @@ export default function Register({}: Props) {
     validateOnBlur: false,
     validateOnChange: false,
     onSubmit: async (values) =>{
-        // console.log(registerValidate(values))
-        // console.log('submitting form', values);
-        console.log('onsubmit register click')
         try{ 
             const response = await registerUser(values);
             if (response.data){
@@ -39,7 +35,6 @@ export default function Register({}: Props) {
                 setRegistered(true);
                 return toast.success('Successfully registered new user!')
             }
-            console.log(response.data);
         } catch (error){
             console.log(error)
         }
