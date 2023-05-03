@@ -1,6 +1,6 @@
-# QuizApp
+# Kiwi-Rious Kwizzers!
 
-Welcome to QuizApp, a full-stack quiz application built with React, Redux, Node.js, Express.js, PostgreSQL, and Docker.
+Welcome to Kiwi-rious Kwizzers, a full-stack quiz application built with React, Redux, Node.js, Express.js, PostgreSQL, and Docker, and more! 
 
 ## Table of Contents
 
