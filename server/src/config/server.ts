@@ -13,7 +13,7 @@ const createServer = () => {
     const app = express();
 
     const corsOptions = {
-        origin: 'http://localhost:3000',
+        origin: "localhost:3000",
         credentials: true,
         optionsSuccessStatus: 200,
     }
@@ -30,10 +30,10 @@ const createServer = () => {
     app.use(passport.initialize());
     app.use(passport.session());
 
-    app.use('/', apiRoutes);
-    // app.get('/*', (req, res) => {
-    //     throw createHttperror(404, 'Page Not Found');
-    // });
+    app.use(`/${process.env.API_ROUTES_PREFIX}`, apiRoutes);
+    app.get('/*', (req, res) => {
+        throw createHttperror(404, 'Page Not Found');
+    });
 
     app.use(errorHandler);
     return app;
