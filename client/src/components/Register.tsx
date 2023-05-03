@@ -5,9 +5,8 @@ import styles from "../styles/home.module.css";
 import toast, { Toaster } from "react-hot-toast";
 import { useFormik } from "formik";
 import { registerUser } from "../helper/apiCalls";
-type Props = {};
 
-export default function Register({}: Props) {
+export default function Register() {
   const [isRegistered, setRegistered] = useState(false);
   const handleClick = (event: any) => {
     event.preventDefault();

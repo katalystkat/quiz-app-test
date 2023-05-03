@@ -1,9 +1,8 @@
 import React, {useState, useEffect} from 'react'
 import { useAppSelector } from '../redux/hooks';
 import styles from '../styles/home.module.css';
-type Props = {}
 
-export default function History({}: Props) {
+export default function History() {
     const { attemptHistory } = useAppSelector(state => state.history);
     const [isLoading, setIsLoading] = useState(true);
     let stateUserId = attemptHistory[0]["userId"];

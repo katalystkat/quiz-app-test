@@ -6,6 +6,7 @@ Welcome to Kiwi-rious Kwizzers, a full-stack quiz application built with React, 
 
 - [QuizApp](#quizapp)
   - [Table of Contents](#table-of-contents)
+  - [Features](#features)
     - [Prerequisites](#prerequisites)
     - [Installation](#installation)
       - [Set up the Dev Environment](#set-up-the-dev-environment)
@@ -17,6 +18,15 @@ Welcome to Kiwi-rious Kwizzers, a full-stack quiz application built with React, 
   - [Future Features](#future-features)
 
 
+
+## Features 
+[x] Kiwi-zy Difficult Kwiz 
+[x] Record of your Kiwi-zy Attempts
+[x] Authentication with Passport
+[x] Authentication Sessions via Express-Session & Connect-pg-simple
+[x] Simplifid DB Query by TYPEORM
+[x]OO Database Model with  TypeORM Entities
+[x] Exception Handling with http-errors
 
 ### Prerequisites
 
@@ -71,8 +81,9 @@ then
 
 Enter http://localhost:3000/ in a browser to take the quiz! 
 
-You MUST create an account in order to take the quiz! Please register, then login! 
+You **MUST** create an account in order to take the quiz! Please register, then login! 
 
+The quiz does **not** mark your answer choices after you've navigated away. No way Jose! You should remember if you've answered any questions, or if you've left any blank! 
 
 ## Technologies Used
 
@@ -103,7 +114,7 @@ You MUST create an account in order to take the quiz! Please register, then logi
 - [ ] Double Logging
 
 ## Future Features 
-- [x] Quiz History
+- [ ] Testing with Jest, Supertest
 - [ ] Multi-Quiz Platform
 - [ ] Quiz Customization
 - [ ] Buttons to Log Out

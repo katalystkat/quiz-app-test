@@ -6,8 +6,8 @@ type Props = {
 }
 
 export default function Questions({ onChecked }:Props) {
-
-    const [checked, setChecked] = useState<string | undefined>(undefined)
+    // For setting CSS to check radio input on navigation
+    // const [checked, setChecked] = useState<string | undefined>(undefined)
     const [{ isLoading, apiData, serverError }] = useFetchQuestion()
     const questions = useAppSelector(state => state.questions.queue[state.questions.trace])
     const trace = useAppSelector(state => state.questions.trace)

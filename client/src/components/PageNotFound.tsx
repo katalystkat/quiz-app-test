@@ -1,9 +1,8 @@
 import React from 'react'
 import styles from '../styles/home.module.css';
 import logo from '../assets/kiwibird.png';
-type Props = {}
 
-export default function PageNotFound({}: Props) {
+export default function PageNotFound() {
 
 return (
   <div className="container mx-auto">

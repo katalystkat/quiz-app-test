@@ -18,7 +18,6 @@ type Props = {
 
 export default function Results({ setIsLoggedIn}: Props) {
     const [{isLoading, apiData, serverError}] = useFetchAnswers();
-    const state = useAppSelector(state => state)
     const answers = useAppSelector(state => state.answer.answers)
     const results = useAppSelector(state => state.result.result)
     const [hasAddedHistory, setHasAddedHistory] = useState(false)

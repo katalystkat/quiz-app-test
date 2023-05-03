@@ -1,4 +1,3 @@
-import React, {useState} from 'react'
 import {Link } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 import logo from '../assets/kiwibird.png';
@@ -14,7 +13,6 @@ type Props = {
 
 
 export default function Login({setIsLoggedIn}:Props) {
-    const dispatch = useAppDispatch();
     const navigate = useNavigate();
     const formik = useFormik({
         initialValues: {
