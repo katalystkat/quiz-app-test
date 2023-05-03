@@ -53,13 +53,16 @@ Have a great attitude to learn!
   
 `cd /quiz-app-test/client`
 
-3. Build the front! 
-```npm start```
+3. Install & Build the front! 
+```npm i ``` 
+then ```npm start```
 
 4. Open up a new tab, change into project directory, backend: 
 `cd /quiz-app-test/server`
 
 5. Build & Run the Server: 
+```npm i ```
+then 
 ```npm run build```
 ```npm start```
 
