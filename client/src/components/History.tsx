@@ -1,34 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import { useAppSelector } from '../redux/hooks';
+import styles from '../styles/home.module.css';
 type Props = {}
-
-// export default function History({}: Props) {
-//     const { attemptHistory } = useAppSelector(state => state.history)
-//     console.log('attempt history: ' + attemptHistory);
-//     console.log(useAppSelector(state=>state));
-//   return (
-//     <div>
-//         <table>
-//             <thead className="table-header">
-//                 <tr className="table-row">
-//                     <td>Date</td>
-//                     <td>Results</td>
-//                     <td>Score</td>
-//                 </tr>
-//             </thead>
-//             <tbody>
-//                 {Object.entries(attemptHistory).map(([attemptId, attemptDetails]) => (
-//                     <tr key={attemptId} className="table-body">
-//                     <td>{attemptDetails.date}</td>
-//                     <td>{JSON.stringify(attemptDetails.userResults)}</td>
-//                     <td>{attemptDetails.userScore}</td>
-//                 </tr>
-//                 ))}
-//             </tbody>
-//         </table>
-//     </div>
-//   )
-// }
 
 export default function History({}: Props) {
     const { attemptHistory } = useAppSelector(state => state.history);
@@ -51,9 +24,9 @@ export default function History({}: Props) {
         <table>
           <thead className="table-header">
             <tr className="table-row">
-              <td>Date</td>
-              <td>Results</td>
-              <td>Score</td>
+              <th className={styles.tableHeader}>Date</th>
+              <th className={styles.tableHeader}>Results</th>
+              <th className={styles.tableHeader}>Score</th>
             </tr>
           </thead>
           <tbody>

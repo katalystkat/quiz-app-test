@@ -1,5 +1,4 @@
 import React, {useEffect} from 'react'
-import '../styles/result.css';
 import History from './History';
 import {Link, useNavigate} from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../redux/hooks';
@@ -30,7 +29,10 @@ export default function Results({}: Props) {
       try{
         const response = await logoutUser();
         if (response) {
-          toast.success('Logout Success')
+          toast.success('Logout Success, eating kiwi...');
+          console.log('pre-clearance: ' + localStorage);
+          localStorage.clear();
+          console.log('post-clearance: ' + localStorage);
           navigate('/')
         } else {
           return toast.error('Unable to logout')
@@ -68,16 +70,16 @@ export default function Results({}: Props) {
 
     return (
       <div className="container mx-auto">
-        <div className="flex justify-center items-center">
+        <div className="flex justify-center h-screen py-1 items-center">
           <div className={styles.glass}>
             <div className="title flex flex-col items-center">
-          <h1 className="text-5xl font-bold"> Quiz Application</h1>
+          <h1 className={styles.appTitle}> Quiz Application</h1>
           <div className="text-left">
               <div className="flex flex-row" >
                   <span className={styles.resultsKey}>Username: </span>
                   <span className={styles.resultsValue}>Kat</span>
               </div>
-              <div className="flex flex-row" >
+              <div className="flex" >
                   <span className={styles.resultsKey}>Total Quiz Points: </span>
                   <span className={styles.resultsValue}>{score.percentage}</span>
               </div>
@@ -90,7 +92,7 @@ export default function Results({}: Props) {
                   <span className={styles.resultsValue}>{score.percentage > 70 ? "PASS" : "FAIL"}</span>
               </div>
                  
-              <div className="container">
+              <div className="container py-16">
                   <History/>
               </div></div>
               <div>

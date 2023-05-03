@@ -4,18 +4,28 @@
     box-shadow: 0 4px 30px #4747470b;
     backdrop-filter: blur(7.1px);
     border: 1px solid rgba(255, 255, 255, 0.3);
-    @apply border-4 border-gray-50 shrink-0 h-3/5 w-[30%] rounded-3xl py-20 px-7 min-w-max
+    @apply border-4 border-gray-50 shrink-0 w-[30%] rounded-3xl py-10 px-7 min-w-max 
 }
 
+.appTitle{
+ @apply text-5xl font-bold py-10
+}
 .logo_img{
     @apply border-4 border-gray-100 w-[135px] rounded-full shadow-lg cursor-pointer;
     @apply hover:border-gray-200;
 }
 
+.resultsKey{
+}
+
+.resultsValue{
+    @apply px-10 text-right 
+}
+
 .btn{
-    @apply border bg-red-400 w-2/3 py-4 rounded-lg text-gray-50 text-xl shadow-sm text-center;
+    @apply block border bg-green-900 w-28 py-4 rounded-lg text-gray-50 text-xl shadow-sm text-center;
 }
 
 .btn:hover{
-    background-color: pink;
+    background-color: purple;
 }

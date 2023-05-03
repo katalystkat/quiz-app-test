@@ -51,7 +51,7 @@ export default function Quiz({}: Props) {
     
   return (
     <div className="container mx-auto">
-        <div className="flex justify-center h-screen items-center py-1/1">
+        <div className="flex justify-center h-screen items-center">
             <div className={styles.glass}>
                 <div className="title flex flex-col items-center">
         <h1 className="title text-5xl py-2 text-light">Do you R E A L L Y know kiwis?</h1>

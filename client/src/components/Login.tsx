@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import {Link } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 import logo from '../assets/logo.png';
-import styles from '../styles/login.module.css';
+import styles from '../styles/home.module.css';
 // import { Toaster } from 'react-hot-toast';
 import toast, {Toaster} from 'react-hot-toast'
 import { useFormik } from 'formik';
@@ -56,7 +56,7 @@ export default function Login({}: Props) {
         <div className="flex justify-center h-screen items-center">
             <div className={styles.glass}>
                 <div className="title flex flex-col items-center">
-                    <h2 className="text-5xl font-bold">Quiz App Title</h2>
+                    <h2 className={styles.appTitle}>Quiz App Title</h2>
                     <span className="text-xl text-center w-2/3">Quiz Information and introduction</span>
                 </div>
                 <form className="py-1" onSubmit={formik.handleSubmit}>
