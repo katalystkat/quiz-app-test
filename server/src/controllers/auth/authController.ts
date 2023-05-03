@@ -44,19 +44,25 @@ const login = (
 }
 
 const logout = (
-    req: Request, 
-    res: Response,
+    req: TypedRequestBody<AuthLoginBody>,
+    res: Response<AuthLoginResponse>,
     next: NextFunction,
 ) => {
     req.logout((err) => {
-        if (err) { 
-            return next(err);
+      if (err) {
+        return next(err);
+      }
+      req.session.destroy((err) => {
+        if (err) {
+          return next(err);
         }
-        req.session.destroy(()=> {
-            return res.send();
-        });
+        // Clear the session cookie from the user's browser
+        res.clearCookie('the golden kiwi'); // Replace with your session cookie name
+        return res.send();
+      });
+      
     });
-};
+  };
 
 const authenticated = (
     req: Request,

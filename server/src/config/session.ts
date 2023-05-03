@@ -13,6 +13,7 @@ const sessionStore = process.env.NODE_ENV === 'test' ? undefined : new (pgSessio
 
 export default session({
     store: sessionStore,
+    name: "the golden kiwi",
     secret: 'renegadebio-nutriquiz',
     saveUninitialized: false,
     resave: false,

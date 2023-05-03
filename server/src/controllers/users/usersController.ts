@@ -99,22 +99,22 @@ const login = async (req: TypedRequestBody<UsersCreateBody>, res: Response, next
     }
   }
   
-// GET: http://localhost:8080/users/generateOTP
-const generateOTP = async (req: TypedRequestBody<UsersCreateBody>, res: Response)=> {
-    res.json('generateOTP route');
-}
+// // GET: http://localhost:8080/users/generateOTP
+// const generateOTP = async (req: TypedRequestBody<UsersCreateBody>, res: Response)=> {
+//     res.json('generateOTP route');
+// }
 
-// GET: http://localhost:8080/users/verifyOTP
-const verifyOTP = async (req: TypedRequestBody<UsersCreateBody>, res: Response)=> {
-    res.json('verifyOTP route');
-}
+// // GET: http://localhost:8080/users/verifyOTP
+// const verifyOTP = async (req: TypedRequestBody<UsersCreateBody>, res: Response)=> {
+//     res.json('verifyOTP route');
+// }
 
-// GET: http://localhost:8080/users/createResetSession
-// Redirects User when OTP is valid
-const createResetSession = async (req: TypedRequestBody<UsersCreateBody>, res: Response)=> {
-    res.json('createResetSession route');
-}
+// // GET: http://localhost:8080/users/createResetSession
+// // Redirects User when OTP is valid
+// const createResetSession = async (req: TypedRequestBody<UsersCreateBody>, res: Response)=> {
+//     res.json('createResetSession route');
+// }
 
 export default {
-    create, login, verifyUser, generateOTP, verifyOTP, createResetSession
+    create, login, verifyUser
 };
