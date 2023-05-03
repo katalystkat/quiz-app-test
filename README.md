@@ -36,7 +36,8 @@ Have a great attitude to learn!
 2. Install [Docker Desktop](https://www.docker.com/products/docker-desktop/)
 3. Run Docker Desktop
 4. Ignore our Dockerfile for now. 
-5. Run containerized postgreSQL: 
+
+5. Run containerized postgreSQL: (We'll abstract out the environmental variables in future versions.. We've broke it once, maybe we can unbreak it another day)
    ```docker run --name some-postgres -e POSTGRES_PASSWORD=mysecretpassword -p 5432:5432 -d postgres``` 
 6. Connect to PostgreSQL Server
    ```docker exec -it some-postgres psql -U postgres```
@@ -104,6 +105,7 @@ You MUST create an account in order to take the quiz! Please register, then logi
 
 ## Future Features 
 - [x] Quiz History
+- [ ] Abstract out environmental variables
 - [ ] Multi-Quiz Platform
 - [ ] Quiz Customization
 - [ ] Buttons to Log Out
