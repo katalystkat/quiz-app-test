@@ -22,16 +22,17 @@ export const authenticate = async (username: string): Promise<any> => {
 
 // Get QuizData 
 export const getQuizData = async (quizId: string): Promise<any> => {
-    try{
-        const response =  await axiosInstance.get('/quiz/getQuiz', { 
-            data: { quizId: quizId }
-    });
-        console.log(response.data)
-        return response.data;
-    } catch (error){
-        return {error: "unable to complete getQuizData apiCall"}
+    try {
+      const response = await axiosInstance.get('/quiz/getQuiz', {
+        params: {quizId: quizId}
+      });
+      console.log(response.data)
+      return response.data;
+    } catch (error) {
+      console.log(error);
+      return { error: "unable to complete getQuizData apiCall" };
     }
-}
+  };
 
 // Get Quiz Answers
 export const getQuizAnswers = async (quizId: string): Promise<any> => {

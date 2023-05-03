@@ -49,6 +49,7 @@ export const useFetchQuestion = (): [FetchQuestionData, React.Dispatch<SetStateA
         ( async ()=> {
             try{ 
                 const data = await getQuizData("1");
+                console.log(data);
                 if(Object.keys(data).length > 0){
                     setGetData(prev=> ({
                         ...prev,

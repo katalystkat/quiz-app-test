@@ -9,7 +9,8 @@ import createHttpError from 'http-errors';
 // get quiz answers
 
 const getQuizData = async (req: Request, res: Response, next: NextFunction) => {
-    const { quizId } = req.body
+    const { quizId } = req.query;
+    console.log(quizId);
     if (!quizId || typeof quizId !== 'string'){
         return next(createHttpError(400, 'Invalid userId'))
       }
