@@ -7,6 +7,7 @@ import { AddQuizResult } from '../customHooks/setQuizResults';
 import { AddHistoryAction } from '../customHooks/fetchHistory';
 import { useNavigate } from 'react-router-dom'
 import { calculateScore } from '../helper/scoring';
+import styles from '../styles/home.module.css';
 type Props = {}
 
 export default function Quiz({}: Props) {
@@ -49,13 +50,20 @@ export default function Quiz({}: Props) {
     }
     
   return (
-    <div className="container">
-        <h1 className="title text-light">Do you R E A L L Y know kiwis?</h1>
-        <Questions onChecked={handleChecked}/>
+    <div className="container mx-auto">
+        <div className="flex justify-center h-screen items-center py-1/1">
+            <div className={styles.glass}>
+                <div className="title flex flex-col items-center">
+        <h1 className="title text-5xl py-2 text-light">Do you R E A L L Y know kiwis?</h1>
+       <span className="text-xl text-center w-2/3"> Quiz span</span>
+       <Questions onChecked={handleChecked}/>
         <div className="grid">
-            { trace > 0 ? <button className="btn prev" onClick={onPrev}>Previous</button>: <div></div> }
-            <button className="btn next" onClick={onNext}>{(lastQuestion) ? "Complete" : "Next"}</button>
+            { trace > 0 ? <button className={styles.btn} onClick={onPrev}>Previous</button>: <div></div> }
+            <button className={styles.btn} onClick={onNext}>{(lastQuestion) ? "Complete" : "Next"}</button>
         </div>
+    </div>
+    </div>
+    </div>
     </div>
   )
 }

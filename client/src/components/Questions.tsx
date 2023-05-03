@@ -26,7 +26,7 @@ export default function Questions({ onChecked }:Props) {
 
   return (
     <div className='questions-container'>
-        <h2 className='text-light'>{questions?.question}</h2>
+        <h2 className='text-3xl py-3'>{questions?.question}</h2>
         <ul key={trace}>
             {
                 questions?.answers.map((question, index)=> (
@@ -38,7 +38,7 @@ export default function Questions({ onChecked }:Props) {
                             id={`question-${index}-option`} 
                             onChange={()=> onSelect(index)} 
                         />
-                    <label className="text-primary" htmlFor={`question-${index}-option`}>{question?.answer}</label>
+                    <label className="text-center" htmlFor={`question-${index}-option`}>{question?.answer}</label>
                     <div className="check"></div>
                     </li>
                 ))

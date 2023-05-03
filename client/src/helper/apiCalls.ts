@@ -76,6 +76,17 @@ export const loginUser = async ( values: {username: string, password: string}): 
         return {error: "Unable to complete register user api call"}
     }
 }
+
+
+export const logoutUser = async (): Promise<any> =>{
+    try{
+        const response =  await axiosInstance.post('/auth/logout')
+        return response;
+    } catch (error){
+        return {error: "Unable to complete logout user api call"}
+    }
+}
+
 // Log Quiz Attempt
 export const logQuizAttempt = async (userId: string, quizId: string, score: number): Promise<any> => {
     try{
