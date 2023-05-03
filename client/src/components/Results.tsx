@@ -44,46 +44,28 @@ export default function Results({ setIsLoggedIn}: Props) {
       }
     }
 
-  useEffect(() => {
-    if (Object.keys(results).length > 0 && Object.keys(answers).length > 0 && !hasAddedHistory) {
-      console.log("first quiz result");
-      const addHistory = async () => {
-        const score = calculateScore(results, answers);
-        const userId = localStorage.getItem("userId") || "default_userId";
-        const date = new Date();
-        await dispatch(
-          AddHistoryAction(userId, {
-            userId: userId,
-            date: date.toLocaleDateString(),
-            userResults: results,
-            userScore: score.percentage,
-          })
-        );
-        setHasAddedHistory(true);
-      };
-      addHistory();
-    }
-  }, [results, answers, hasAddedHistory]);
-// above is most recent
-
-
   // useEffect(() => {
-  //   console.log('first quiz result');
+  //   if (Object.keys(results).length > 0 && Object.keys(answers).length > 0 && !hasAddedHistory) {
+  //     console.log("first quiz result");
   //     const addHistory = async () => {
   //       const score = calculateScore(results, answers);
-  //       const userId = localStorage.getItem('userId') || 'default_userId';
+  //       const userId = localStorage.getItem("userId") || "default_userId";
   //       const date = new Date();
   //       await dispatch(
   //         AddHistoryAction(userId, {
   //           userId: userId,
   //           date: date.toLocaleDateString(),
   //           userResults: results,
-  //           userScore: score.percentage
+  //           userScore: score.percentage,
   //         })
   //       );
+  //       setHasAddedHistory(true);
   //     };
   //     addHistory();
-  //   }, []);
+  //   }
+  // }, [results, answers, hasAddedHistory]);
+// above is most recent
+
 
     const score = calculateScore(results, answers)
     

@@ -1,20 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import {HistoryState, AttemptDetails } from '../../types/reducerTypes';
 
-interface AttemptDetails {
-  userId: string,
-  date: string,
-  userResults: Record<number, number | undefined>;
-  userScore: number
-}
-
-interface AttemptHistory {
-    [attemptId: number]: AttemptDetails;
-}
-
-interface HistoryState {
-  attemptCounter: number;
-  attemptHistory: AttemptHistory;
-}
 
 const initialState: HistoryState = {
     attemptCounter: 0,

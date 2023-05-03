@@ -22,7 +22,7 @@ export default function Quiz({}: Props) {
     const formattedDate = date.toLocaleString();
     const userId = localStorage.getItem('userId') || 'default_user';
 
-    async function onNext(){
+    const onNext = async ()=> {
         if(trace < queue.length){
             if (result[trace] !== check && check !== undefined){
             dispatch(AddQuizResult(trace, check));
@@ -32,32 +32,37 @@ export default function Quiz({}: Props) {
         if(trace === queue.length -2) {setLastQuestion(true)}
         else if (lastQuestion){
             await dispatch(AddQuizResult(trace, check));
-            // const score = await calculateScore(result, state.answer.answers);
-            // const calculatedScore = score.percentage;
-
-            // await dispatch(
-            // AddHistoryAction(userId, {
-            //     userId: userId,
-            //     date: formattedDate,
-            //     userResults: result,
-            //     userScore: calculatedScore,
-            // })
-            // );
-
-            // console.log(state);
+            // remove below
+            const score = await calculateScore(result, state.answer.answers);
+            const calculatedScore = score.percentage;
+            await dispatch(
+                AddHistoryAction(userId, {
+                    userId: userId,
+                    date: formattedDate,
+                    userResults: result,
+                    userScore: calculatedScore,
+                })
+                // remove above
+            );
             navigate("/results", { replace: true });
         }
     }
 
-    function onPrev(){
+    const onPrev = () => {
         setLastQuestion(false)
         dispatch(GetPrevQuestion())
     }
 
-    function handleChecked(optionChecked:any){
+    const handleChecked = (optionChecked:any)=>{
         setChecked(optionChecked)
     }
-    
+
+    useEffect(() => {
+        if (trace === 0 && queue.length === 0) {
+          dispatch(GetNextQuestion());
+        }
+      }, []);
+
   return (
     <div className="container mx-auto">
         <div className="flex justify-center h-screen items-center">

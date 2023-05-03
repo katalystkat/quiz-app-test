@@ -1,16 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-
-interface Question {
-    id: number;
-    question: string;
-    answers: {answer: string; correct: boolean}[]
-}
-
-interface UserState{
-    queue: Question[],
-    answers: string[],
-    trace: number,
-}
+import { UserState } from '../../types/reducerTypes';
 
 const initialState: UserState = {
     queue: [],
