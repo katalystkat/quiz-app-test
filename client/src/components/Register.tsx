@@ -5,6 +5,7 @@ import styles from "../styles/home.module.css";
 import toast, { Toaster } from "react-hot-toast";
 import { useFormik } from "formik";
 import { registerUser } from "../helper/apiCalls";
+import { registerValidate } from '../helper/validate";
 type Props = {};
 
 export default function Register({}: Props) {
@@ -25,6 +26,7 @@ export default function Register({}: Props) {
     validateOnChange: false,
     onSubmit: async (values) => {
       try {
+      registerValidate(values);
         const response = await registerUser(values);
         if (response.data) {
           const userId = response.data;
