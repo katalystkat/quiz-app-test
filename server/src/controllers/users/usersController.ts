@@ -8,7 +8,7 @@ import { TypedRequestBody } from '../../types/express/express.js';
 import { UsersCreateBody } from '../../types/routes/users.js';
 import { validateCreateBody } from './userValidators.js';
 import { validateLoginBody } from '../auth/authValidators.js';
-// Validate, Control, Connect, Start Transaction
+
 const create = async (req: TypedRequestBody<UsersCreateBody>, res: Response) => {
     const { username, email, password } = validateCreateBody(req.body);
 
@@ -55,50 +55,8 @@ const create = async (req: TypedRequestBody<UsersCreateBody>, res: Response) => 
     }
 };
 
-const verifyUser = async (req: TypedRequestBody<UsersCreateBody>, res: Response, next: NextFunction) => {
-    const { username  } = req.body;
-    try{ 
-      // find user in the database
-      const userRepo = AppDataSource.getRepository(Participant);
-      const user = await userRepo.findOneBy({ username });
-      if (!user) {
-        return next(createHttpError(404, 'user does not exist'));
-      }
-      next();
-    } catch (error){
-        return next(createHttpError(404, 'user verification error'));
-    }
-}
-    
-const login = async (req: TypedRequestBody<UsersCreateBody>, res: Response, next: NextFunction) => {
-    const { username, password } = req.body;
-    validateLoginBody(req.body);
-    console.log("in login controller");
-    try {
-      // find user in the database
-      const userRepo = AppDataSource.getRepository(Participant);
-      const user = await userRepo.findOneBy({ username });
-      if (!user) {
-        return next(createHttpError(401, 'user does not exist'));
-      }
-      // verify user password
-      if (password !== undefined){
-        console.log('in password verification block');
-        const isPasswordValid = user.verifyPassword(password);
-        const token = jwt.sign({
-            userId: user.id,
-            username: user.username 
-        }, 'secret', {expiresIn : "24h" });
-        return res.status(200).send({
-            msg: "Login Successful, Token Generated",
-            username: user.username,
-            token
-        })
-      }} catch (error) {
-      return next(error);
-    }
-  }
-  
+
+// Future Controllers for OTP
 // // GET: http://localhost:8080/users/generateOTP
 // const generateOTP = async (req: TypedRequestBody<UsersCreateBody>, res: Response)=> {
 //     res.json('generateOTP route');
@@ -116,5 +74,5 @@ const login = async (req: TypedRequestBody<UsersCreateBody>, res: Response, next
 // }
 
 export default {
-    create, login, verifyUser
+    create,
 };

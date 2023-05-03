@@ -21,9 +21,7 @@ const login = (
             if (err){
                 return next(err);
             }
-            console.log(user);
             if (!user) {
-                console.log('no user');
                 return next(
                     createHttpError(401, 'User not found in database'),
                 );
@@ -60,7 +58,7 @@ const logout = (
         res.clearCookie('the golden kiwi'); // Replace with your session cookie name
         return res.send();
       });
-      
+
     });
   };
 

@@ -14,6 +14,8 @@ const addQuizAttempt = async (
     next: NextFunction,
   ) => {
     const { userId, quizId, score } = req.body;
+    console.log(req.body);
+    console.log(userId)
     if (!userId || typeof userId !== 'string'){
       return next(createHttpError(400, 'Invalid userId'))
     }
@@ -24,7 +26,6 @@ const addQuizAttempt = async (
       return next(createHttpError(400, 'Invalid score'))
     }
     try {
-      // check if the participant exists
       const participantRepo = AppDataSource.getRepository(Participant);
       const participant = await participantRepo.findOne({
         where: { id: userId }
@@ -32,26 +33,27 @@ const addQuizAttempt = async (
       if (!participant) {
         return next(createHttpError(404, 'Participant not found'));
       }
-      // check if the quiz exists
       const quizRepo = AppDataSource.getRepository(Quiz);
       const quiz = await quizRepo.findOne({
         where: { id: quizId }
       });
       if (!quiz) {
-        return next(createHttpError(404, 'Quiz nowhere to be found :('));
+        return next(createHttpError(404, 'Quiz nowhere to be found'));
       }
       // create a new quiz attempt
       const quizAttemptRepo = AppDataSource.getRepository(QuizAttempt);
-      const quizAttempt = new QuizAttempt();
+      const quizAttempt = await new QuizAttempt();
       quizAttempt.user = participant;
       quizAttempt.quiz = quiz;
       quizAttempt.score = score;
+      console.log('quizAttempt: ' + quizAttempt);
       const newQuizAttempt = await quizAttemptRepo.save(quizAttempt);
       return res.status(201).send({
         message: 'Quiz attempt added successfully',
         quizAttempt: newQuizAttempt,
       });
     } catch (error) {
+      console.log('add new quizattempt error')
       return next(error);
     }
   };
@@ -62,7 +64,6 @@ const getQuizAttempts = async (req: Request, res: Response, next: NextFunction) 
       return next(createHttpError(400, 'Invalid userId'))
     }
     try {
-      // find user in the database
         const quizAttemptsRepo = AppDataSource.getRepository(QuizAttempt);
         const quizAttempts = await quizAttemptsRepo.find({
             where: { user: { id: userID} },

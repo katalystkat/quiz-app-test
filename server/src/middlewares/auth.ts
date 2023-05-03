@@ -23,10 +23,8 @@ export const Authenticate = async (req: Request, res: Response, next: NextFuncti
 
 export const isAuthenticated = (req: Request, res: Response, next: NextFunction) => {
     if (req.isAuthenticated()) {
-        console.log('checking authentication')
         next();
     } else {
-        console.log('is not authenticated');
         next(createHttpError(403, 'User must be authenticated'));
     }
 }

@@ -4,18 +4,13 @@ import { Quiz } from '../../entities/quiz.js';
 import { Question } from '../../entities/question.js';
 import { Option } from '../../entities/option.js';
 import createHttpError from 'http-errors';
-// Need controller to 
-// 1) get quiz questions and options 
-// get quiz answers
 
 const getQuizData = async (req: Request, res: Response, next: NextFunction) => {
     const { quizId } = req.query;
-    console.log(quizId);
     if (!quizId || typeof quizId !== 'string'){
         return next(createHttpError(400, 'Invalid userId'))
       }
     try {
-      // find user in the database
         const quizRepo = AppDataSource.getRepository(Quiz);
         const quiz = await quizRepo.find({ 
             where: { id: quizId },
