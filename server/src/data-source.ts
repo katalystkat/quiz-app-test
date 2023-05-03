@@ -6,7 +6,7 @@ export const AppDataSource = new DataSource({
     host: process.env.NODE_ENV === 'test' ? process.env.TEST_DB_HOST : process.env.DB_HOST,
     port: process.env.NODE_ENV === 'test' ? Number(process.env.TEST_DB_PORT) : Number(process.env.DB_PORT),
     username: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
+    password: String(process.env.DB_PASSWORD),
     database: process.env.NODE_ENV === 'test' ? process.env.TEST_DB_NAME : process.env.DB_NAME,
     synchronize: true,
     entities: ["dist/entities/*.js"],

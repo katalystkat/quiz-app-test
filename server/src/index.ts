@@ -1,6 +1,7 @@
-import * as dotenv from 'dotenv';
+import dotenv from 'dotenv';
 import 'reflect-metadata';
-dotenv.config();
+const dotenvResult = dotenv.config();
+console.log('dotenvResult', dotenvResult);
 
 import createServer from './config/server.js';
 import { AppDataSource } from './data-source.js';
