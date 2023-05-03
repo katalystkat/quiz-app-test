@@ -6,7 +6,7 @@ const router = express.Router();
 
 // POST Methods
 // Registers new user in database, returns userID 
-router.route('/register').post(UsersController.create);
+router.post('/register', UsersController.create);
 
 // Future ADDONs: 
 // router.get('/generateOTP', UsersController.generateOTP) //generate OTP

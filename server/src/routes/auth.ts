@@ -6,7 +6,7 @@ import { isAuthenticated, isUnauthenticated, Authenticate } from '../middlewares
 const router = express.Router();
 
 // POST: Login user / Logout of Session 
-router.route('/login').post(isUnauthenticated, AuthController.login);
-router.route('/logout').post(isAuthenticated, AuthController.logout);
+router.post('/login', isUnauthenticated, AuthController.login);
+router.post('/logout', isAuthenticated, AuthController.logout);
 
 export default router;

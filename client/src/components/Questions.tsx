@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import data from '../database/quizData'
 import { useFetchQuestion } from '../customHooks/fetchQuestions';
 import { useAppSelector } from '../redux/hooks'
-import styles from '../styles/home.module.css';
 type Props = {
     onChecked: (optionChecked: number) => void
 }

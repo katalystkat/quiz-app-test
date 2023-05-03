@@ -10,6 +10,7 @@ import { calculateScore } from '../helper/scoring'
 import { logoutUser } from '../helper/apiCalls';
 import toast from 'react-hot-toast'
 import styles from '../styles/home.module.css'
+import logo from '../assets/kiwibird.png';
 
 type Props = {
   setIsLoggedIn: (loggedIn: boolean) => void;
@@ -64,29 +65,9 @@ export default function Results({ setIsLoggedIn}: Props) {
       addHistory();
     }
   }, [results, answers, hasAddedHistory]);
-// above is most recent
-
-
-  // useEffect(() => {
-  //   console.log('first quiz result');
-  //     const addHistory = async () => {
-  //       const score = calculateScore(results, answers);
-  //       const userId = localStorage.getItem('userId') || 'default_userId';
-  //       const date = new Date();
-  //       await dispatch(
-  //         AddHistoryAction(userId, {
-  //           userId: userId,
-  //           date: date.toLocaleDateString(),
-  //           userResults: results,
-  //           userScore: score.percentage
-  //         })
-  //       );
-  //     };
-  //     addHistory();
-  //   }, []);
 
     const score = calculateScore(results, answers)
-    
+    const username = localStorage.getItem("username");
     if(isLoading) return <h3 className="text-light"> isLoading</h3>
     if(serverError) return <h3 className="text-light"> Unknown error </h3>
 
@@ -95,11 +76,14 @@ export default function Results({ setIsLoggedIn}: Props) {
         <div className="flex justify-center h-screen py-1 items-center">
           <div className={styles.glass}>
             <div className="title flex flex-col items-center">
-          <h1 className={styles.appTitle}> Quiz Application</h1>
+          <h1 className={styles.appTitle}>Kiwi-rious Kwizzers</h1>
+          <div className="logo flex justify-center py-4">
+                        <img src={logo} className={styles.logo_img} alt="logo of a plant" />
+                    </div>
           <div className="text-left">
               <div className="flex flex-row" >
                   <span className={styles.resultsKey}>Username: </span>
-                  <span className={styles.resultsValue}>Kat</span>
+                  <span className={styles.resultsValue}>{username}</span>
               </div>
               <div className="flex" >
                   <span className={styles.resultsKey}>Total Quiz Points: </span>

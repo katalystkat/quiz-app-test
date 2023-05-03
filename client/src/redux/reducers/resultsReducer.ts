@@ -1,11 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-
-interface resultState{
-    userId: string,
-    result : {
-        [questionId: number]: number | undefined;
-    },
-}
+import { resultState } from '../../types/reducerTypes';
 
 const initialState: resultState = {
     userId: "user0",

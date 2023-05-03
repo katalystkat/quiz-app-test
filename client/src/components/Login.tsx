@@ -1,26 +1,19 @@
 import React, {useState} from 'react'
 import {Link } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
-import logo from '../assets/logo.png';
+import logo from '../assets/kiwibird.png';
 import styles from '../styles/home.module.css';
 // import { Toaster } from 'react-hot-toast';
 import toast, {Toaster} from 'react-hot-toast'
 import { useFormik } from 'formik';
-import { usernameValidate, passwordValidate } from '../helper/validate'
-import { authenticate, loginUser } from '../helper/apiCalls';
-import jwt_decode from 'jwt-decode'
+import { loginUser } from '../helper/apiCalls';
 import { useAppDispatch } from '../redux/hooks';
-import { setUserId } from '../redux/reducers/resultsReducer';
-import Token from '../types/tokenTypes';
 type Props = {
     setIsLoggedIn: (loggedIn: boolean) => void;
 }
 
 
 export default function Login({setIsLoggedIn}:Props) {
-
-    // update formik helper functions to be combined into one validation function
-    // const history = useHistory();
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
     const formik = useFormik({
@@ -37,6 +30,7 @@ export default function Login({setIsLoggedIn}:Props) {
                 if (response.data) {
                     const userId = response.data.id;
                     localStorage.setItem('userId', userId);
+                    localStorage.setItem('username', values.username);
                     toast.success('Login Success! Please wait for redirect!')
                     setIsLoggedIn(true)
                     navigate('/quiz');
@@ -54,8 +48,8 @@ export default function Login({setIsLoggedIn}:Props) {
         <div className="flex justify-center h-screen items-center">
             <div className={styles.glass}>
                 <div className="title flex flex-col items-center">
-                    <h2 className={styles.appTitle}>Quiz App Title</h2>
-                    <span className="text-xl text-center w-2/3">Quiz Information and introduction</span>
+                <h2 className={styles.appTitle}>Kiwi-rious Kwizzers</h2>
+                    <span className="text-xl text-center w-2/3">Welcome to the "Kiwi-rious Quizzers" - a fun and educational quiz all about the fascinating world of kiwi birds and kiwi fruits!</span>
                 </div>
                 <form className="py-1" onSubmit={formik.handleSubmit}>
                     <div className="logo flex justify-center py-4">

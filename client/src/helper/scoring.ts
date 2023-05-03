@@ -3,7 +3,7 @@ type Answers = {
     [questionId: string]: number | undefined;
   }
  
-export function calculateScore(userAnswers: Answers, correctAnswers: Answers) {
+export const calculateScore = (userAnswers: Answers, correctAnswers: Answers) => {
     const totalQuestions = Object.keys(correctAnswers).length;
     let correctCount = 0;
     for (const questionId in userAnswers) {

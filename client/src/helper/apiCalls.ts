@@ -1,14 +1,10 @@
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
-// const token = sessionStorage.getItem('token');
-const BASE_URL = 'http://localhost:8080';
 
 const axiosInstance: AxiosInstance = axios.create({
     baseURL: 'http://localhost:8080',
     withCredentials: true
 })
-// Make API Requests
 
-// Authenticate Function 
 export const authenticate = async (username: string): Promise<any> => {
     try{
         const response =  await axiosInstance.post('/users/authenticate', 
@@ -20,7 +16,6 @@ export const authenticate = async (username: string): Promise<any> => {
     }
 }
 
-// Get QuizData 
 export const getQuizData = async (quizId: string): Promise<any> => {
     try {
       const response = await axiosInstance.get('/quiz/getQuiz', {
@@ -30,9 +25,8 @@ export const getQuizData = async (quizId: string): Promise<any> => {
     } catch (error) {
       return { error: "unable to complete getQuizData apiCall" };
     }
-  };
+};
 
-// Get Quiz Answers
 export const getQuizAnswers = async (quizId: string): Promise<any> => {
     try{
         const response =  await axiosInstance.get('/quiz/getQuizAnswers',{ 
@@ -44,7 +38,6 @@ export const getQuizAnswers = async (quizId: string): Promise<any> => {
     }
 }
 
-// Register User
 export const registerUser = async (values: {username: string, password: string, email: string}): Promise<any> => {
     try{
         const response =  await axiosInstance.post('/users/register', 
@@ -59,7 +52,6 @@ export const registerUser = async (values: {username: string, password: string, 
     }
 }
 
-// Login User 
 export const loginUser = async ( values: {username: string, password: string}): Promise<any> =>{
     try{
         const response =  await axiosInstance.post('/auth/login', 
@@ -73,7 +65,6 @@ export const loginUser = async ( values: {username: string, password: string}): 
     }
 }
 
-// Logout User
 export const logoutUser = async (): Promise<any> =>{
     try{
         const response =  await axiosInstance.post('/auth/logout')
@@ -83,7 +74,6 @@ export const logoutUser = async (): Promise<any> =>{
     }
 }
 
-// Log Quiz Attempt
 export const logQuizAttempt = async (userId: string, quizId: string, score: number): Promise<any> => {
     try{
         const response =  await axiosInstance.post('/quiz/addQuizAttempts', 
@@ -98,7 +88,6 @@ export const logQuizAttempt = async (userId: string, quizId: string, score: numb
     }
 }
 
-// Get QuizAttempts
 export const getQuizAttempts = async (username: string) => {
     try{
         const response =  await axiosInstance.get('/quiz/getQuizAttempts')

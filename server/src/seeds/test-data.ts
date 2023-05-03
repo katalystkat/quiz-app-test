@@ -65,11 +65,14 @@ export const seedData = async () => {
 
   // Seed question data
   const questions: Partial<Question>[] = [
-    { text: 'What is the scientific name for the kiwi bird?', quizId: "1", questionId: "0" },
+    { text: 'Which kiwi is about the size of a bantam, at about 0.9-1.9kg?', quizId: "1", questionId: "0" },
     { text: 'How long does it take for a kiwi egg to hatch?', quizId: "1", questionId: "1" },
     { text: 'What is the largest species of kiwi?', quizId: "1", questionId: "2" },
     { text: 'What is the smallest species of kiwi?', quizId: "1", questionId: "3" },
     { text: 'How many species of kiwi are there?', quizId: "1", questionId: "4"},
+    { text: 'How many golden kiwis satisfies your RDA of Vitamin C?', quizId: "1", questionId: "5"},
+    { text: 'Quantify the amount of excitement a pet Kiwi brings', quizId: "1", questionId: "6"},
+
   ];
   for (const question of questions) {
     const newQuestion = questionRepository.create(question);
@@ -135,56 +138,56 @@ const options: Partial<Option>[] = [
       quizId: "1",
     },
     {
-      text: 'Great spotted kiwi',
+      text: 'Great spotted kiwi, AKA Apteryx Haastii, AKA Great Grey kiwi',
       isCorrect: false,
       questionId: "2",
       optionIndex: 0,
       quizId: "1",
     },
     {
-      text: 'Brown kiwi',
+      text: 'Brown Kiwi, AKA Apteryx Mantelli',
       isCorrect: false,
       questionId: "2",
       optionIndex: 1,
       quizId: "1",
     },
     {
-      text: 'Little spotted kiwi',
+      text: 'Little spotted kiwi, AKA Apteryx Owenii AKA kiki pukupuku',
       isCorrect: true,
       questionId: "2",
       optionIndex: 2,
       quizId: "1",
     },
     {
-      text: 'Rowi',
+      text: 'Apteryx Rowi, AKA rowi, AKA Okarito Brown Kiwi',
       isCorrect: false,
       questionId: "2",
       optionIndex: 3,
       quizId: "1",
     },
     {
-      text: 'Rowi',
+      text: 'Apteryx Rowi, AKA rowi, AKA Okarito Brown Kiwi',
       isCorrect: false,
       questionId: "3",
       optionIndex: 0,
       quizId: "1",
     },
     {
-      text: 'Great spotted kiwi',
+      text: 'Great spotted kiwi, AKA Apteryx Haastii, AKA Great Grey kiwi',
       isCorrect: false,
       questionId: "3",
       optionIndex: 1,
       quizId: "1",
     },
     {
-      text: 'Little spotted kiwi',
+      text: 'Little spotted kiwi, AKA Apteryx Owenii AKA kiki pukupuku',
       isCorrect: true,
       questionId: "3",
       optionIndex: 2,
       quizId: "1",
     },
     {
-      text: 'Haast tokoeka',
+      text: 'Haast tokoeka, AKA Haast Kiwi',
       isCorrect: false,
       questionId: "3",
       optionIndex: 3,
@@ -218,6 +221,62 @@ const options: Partial<Option>[] = [
       optionIndex: 3,
       quizId: "1",
     },
+    {
+      text: "5",
+      isCorrect: false,
+      questionId: "5",
+      optionIndex: 0,
+      quizId: "1",
+    },
+    {
+      text: "10",
+      isCorrect: false,
+      questionId: "5",
+      optionIndex: 0,
+      quizId: "1",
+    },
+    {
+      text: "1",
+      isCorrect: false,
+      questionId: "5",
+      optionIndex: 0,
+      quizId: "1",
+    },
+    {
+      text: "<1",
+      isCorrect: true,
+      questionId: "5",
+      optionIndex: 0,
+      quizId: "1",
+    },
+    {
+      text: "A lifetime's worth of smiles",
+      isCorrect: false,
+      questionId: "6",
+      optionIndex: 0,
+      quizId: "1",
+    },
+    {
+      text: "About the intensity of volcanic lava",
+      isCorrect: false,
+      questionId: "6",
+      optionIndex: 0,
+      quizId: "1",
+    },
+    {
+      text: "Akin to winning the lottery",
+      isCorrect: false,
+      questionId: "6",
+      optionIndex: 0,
+      quizId: "1",
+    },
+    {
+      text: "Inner peace and gratitude",
+      isCorrect: true,
+      questionId: "6",
+      optionIndex: 0,
+      quizId: "1",
+    }
   ];
   
     for (const option of options) {

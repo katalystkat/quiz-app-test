@@ -1,10 +1,8 @@
-import React, {useState, useEffect} from 'react'
+import React, { useEffect } from 'react'
 import {Link} from 'react-router-dom'
-import logo from '../assets/logo.png';
+import logo from '../assets/kiwibird.png';
 import styles from '../styles/home.module.css';
 import { checkLogin } from '../helper/loginStatus';
-import { useFormik } from 'formik';
-import { usernameValidate } from '../helper/validate'
 type Props = {
     isLoggedIn: boolean;
     setIsLoggedIn: (loggedIn: boolean) => void;
@@ -21,8 +19,8 @@ export default function Home({ isLoggedIn, setIsLoggedIn}: Props) {
         <div className="flex justify-center h-screen items-center">
             <div className={styles.glass}>
                 <div className="title flex flex-col items-center">
-                    <h2 className={styles.appTitle}>Quiz App Title</h2>
-                    <span className="text-xl text-center w-2/3">Quiz Information and introduction</span>
+                    <h2 className={styles.appTitle}>Kiwi-rious Kwizzers</h2>
+                    <span className="text-xl text-center w-2/3">Welcome to the "Kiwi-rious Quizzers" - a fun and educational quiz all about the fascinating world of kiwi birds and kiwi fruits!</span>
                 </div>
                     <div className="logo flex justify-center py-4">
                         <img src={logo} className={styles.logo_img} alt="logo of a plant" />

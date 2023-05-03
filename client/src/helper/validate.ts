@@ -1,24 +1,24 @@
 import toast from 'react-hot-toast'
 
 /** validate login page username */
-export async function usernameValidate(values: any){
-    const errors = usernameVerify({username: "string", password: "string", email: "string"}, values);
+export const usernameValidate = (values: any) =>{
+    const errors = usernameVerify({ username: "string", password: "string", email: "string" }, values);
     return errors;
 }
 
-export async function passwordValidate(values: any){
+export const passwordValidate = (values: any) =>{
     const errors = passwordVerify({username: "string", password: "string", email: "string"}, values);
     return errors;
 }
 
-export async function registerValidate(values: any){
+export const registerValidate = (values: any) => {
     const errors = usernameVerify({username: "string", password: "string", email: "string"}, values);
     passwordVerify(errors, values);
     emailVerify(errors, values);
     return errors;   
 }
 /** validate username */
-function usernameVerify(error= {username: "", password: "", email:""}, values: any){
+export const usernameVerify = (error= {username: "", password: "", email:""}, values: any) =>{
     if(!values.username){
         error.username = toast.error('Username Required');
     } else if(values.username.includes(" ")){
@@ -28,7 +28,7 @@ function usernameVerify(error= {username: "", password: "", email:""}, values: a
 }
 
 /** validate email */
-function emailVerify (error ={username: "string", password: "string", email: "string"}, values: any){
+export const emailVerify = (error ={username: "string", password: "string", email: "string"}, values: any) =>{
     if (!values.email){
         error.email = toast.error('Email required for signup!');
     } else if (values.email.includes(" ")){
@@ -38,7 +38,7 @@ function emailVerify (error ={username: "string", password: "string", email: "st
 }
 
 /** validate password */
-function passwordVerify(error = {username: "string", password: "string", email: "string"}, values: any){
+export const passwordVerify = (error = {username: "string", password: "string", email: "string"}, values: any) => {
     const specialChars = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
     if(!values.password){
         error.password = toast.error('Password Required');
