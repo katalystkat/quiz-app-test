@@ -44,7 +44,7 @@ Have a great attitude to learn!
 7. Open up your bakery, I mean, database: 
    ```CREATE DATABASE bakery;``` 
 8. Connect into that database, and follow along your application data via SQL commands! 
-   ```\c quizdb``` 
+   ```\c bakery``` 
 
 #### Setting up the Project
 1. Clone the Project in your directory of choice 
